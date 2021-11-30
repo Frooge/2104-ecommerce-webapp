@@ -1,0 +1,16 @@
+.NavbarMain {
+    display: block;
+}
+
+.navbar-brand {
+    width: 10em;
+    margin-right: 2em;
+}
+
+.navbar-content {
+    margin: 0 0.5em;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
