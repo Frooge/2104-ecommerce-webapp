@@ -2,3 +2,7 @@
     margin-top: 10em;
     margin-bottom: calc(10em - 97.250px);
 }
+
+.hero-image {
+    text-align: center;
+}
