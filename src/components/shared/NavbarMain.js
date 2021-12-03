@@ -4,6 +4,11 @@ import {Navbar, Nav, Container, Form, FormControl, Button} from 'react-bootstrap
 import logo from '../../img/mf_logo.png'
 
 class NavbarMain extends Component {
+    constructor(props){
+        super(props);
+        this.navSelected = props.navSelected;
+    }
+
     render() {
         return (
             <div className="NavbarMain">
@@ -24,10 +29,30 @@ class NavbarMain extends Component {
                                     />
                                     <Button variant="outline-success">Search</Button>
                                 </Form>
-                                <Nav.Link className="navbar-content active">Home</Nav.Link>
-                                <Nav.Link className="navbar-content">About</Nav.Link>
-                                <Nav.Link className="navbar-content" href="/products">Products</Nav.Link>
-                                <Nav.Link className="navbar-content">Cart</Nav.Link>
+                                <Nav.Link href="/" className={[
+                                    'navbar-content',
+                                    'home' === this.navSelected ? 'active' : ''
+                                    ].join(' ')}>
+                                    Home
+                                </Nav.Link>
+                                <Nav.Link href="/" className={[
+                                    'navbar-content',
+                                    'about' === this.navSelected ? 'active' : ''
+                                    ].join(' ')}>
+                                    About
+                                </Nav.Link>
+                                <Nav.Link href="/products" className={[
+                                    'navbar-content',
+                                    'products' === this.navSelected ? 'active' : ''
+                                    ].join(' ')}>
+                                    Products
+                                </Nav.Link>
+                                <Nav.Link href="/" className={[
+                                    'navbar-content',
+                                    'cart' === this.navSelected ? 'active' : ''
+                                    ].join(' ')}>
+                                    Cart
+                                </Nav.Link>
                             </Nav>
                             <Button variant="primary">Login</Button>
                         </Navbar.Collapse>

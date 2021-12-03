@@ -10,6 +10,7 @@ class Hero extends Component {
                 <Image
                 src={milktea}
                 alt="milktea"
+                className="hero-image"
                 rounded
                 fluid
                 />

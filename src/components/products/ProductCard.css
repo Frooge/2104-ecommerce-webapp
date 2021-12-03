@@ -2,8 +2,23 @@
     margin-bottom: 1.4em;
 }
 
-.card {
+.product-card {
     min-height: 300px;
-    background-color: rgb(97, 102, 93);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.product-card > * {
+    color: white;
+}
+
+.product-link {
+    text-decoration: none;
+}
+
+.product-link:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.product-image {
+    width: 100%;
 }

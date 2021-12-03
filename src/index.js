@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Products from './page/Products';
+import Item from './page/Item';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -11,6 +12,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/products" element={<Products />}/>
+        <Route path="/products/item" element={<Item />}/>
       </Routes>
   </BrowserRouter>,
   document.getElementById('root')
