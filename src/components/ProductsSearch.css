@@ -1,0 +1,9 @@
+.ProductsSearch {
+    color: white;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.no-padding {
+    padding: 0 !important;
+}

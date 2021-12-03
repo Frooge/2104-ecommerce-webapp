@@ -9,7 +9,7 @@ class NavbarMain extends Component {
             <div className="NavbarMain">
                 <Navbar variant="light" bg="dark" expand="lg" fixed="top">
                     <Container className="h-100">
-                        <Navbar.Brand href="#home">
+                        <Navbar.Brand href="/">
                             <img className="navbar-brand" href="#" src={logo} alt="mcford logo"/>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,9 +24,10 @@ class NavbarMain extends Component {
                                     />
                                     <Button variant="outline-success">Search</Button>
                                 </Form>
-                                <Nav.Link href="#home" className="navbar-content">Home</Nav.Link>
-                                <Nav.Link href="#link" className="navbar-content">About</Nav.Link>
-                                <Nav.Link href="#link" className="navbar-content">Cart</Nav.Link>
+                                <Nav.Link className="navbar-content active">Home</Nav.Link>
+                                <Nav.Link className="navbar-content">About</Nav.Link>
+                                <Nav.Link className="navbar-content" href="/products">Products</Nav.Link>
+                                <Nav.Link className="navbar-content">Cart</Nav.Link>
                             </Nav>
                             <Button variant="primary">Login</Button>
                         </Navbar.Collapse>

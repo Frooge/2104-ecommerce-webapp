@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import milktea from '../img/milktea.png'
-import {Container, Image} from 'react-bootstrap'
+import {Image} from 'react-bootstrap'
 import './Hero.css'
 
 class Hero extends Component {
     render() {
         return (
-            <div className="Hero">
-                <Container className="hero-image">
-                    <Image
-                    src={milktea}
-                    alt="milktea"
-                    rounded
-                    fluid
-                    />
+            <div className="Hero container">
+                <Image
+                src={milktea}
+                alt="milktea"
+                rounded
+                fluid
+                />
                     
-                </Container>
             </div>
         )
     }

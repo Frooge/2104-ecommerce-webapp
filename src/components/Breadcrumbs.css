@@ -1,0 +1,33 @@
+.Breadcrumbs {
+    margin-top: 10em;
+    margin-bottom: calc(8em - 97.250px);
+}
+
+ol.breadcrumb {
+    align-items: center;
+    margin: 0;
+}
+
+li {
+    color: white;
+    text-decoration: none;
+}
+
+li.breadcrumb-item:hover :not(.active) {
+    text-decoration: underline;
+}
+
+.breadcrumb-item+.breadcrumb-item::before{
+    content:var(--bs-breadcrumb-divider,">") !important;
+    color: white;
+}
+
+.links {
+    width: clamp(400px, 50%, 500px);
+    padding: 0.5em;
+    border-radius: 00.5em;
+}
+
+li.active {
+    color: aqua !important;
+}

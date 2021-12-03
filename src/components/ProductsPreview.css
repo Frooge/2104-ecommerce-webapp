@@ -1,0 +1,23 @@
+.ProductsPreview {
+    margin-bottom: calc(10em - 97.250px);
+}
+
+.image-container {
+    position: absolute;
+    z-index: -1;
+}
+
+.product-link {
+    text-decoration: none;
+    
+}
+
+.product-link:hover {
+    text-decoration: underline;
+    text-decoration-color: gray;
+}
+
+.card-text {
+    color: gray;
+    padding: 1em;
+}

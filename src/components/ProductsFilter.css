@@ -1,0 +1,16 @@
+.ProductsFilter {
+    display: block;
+}
+
+.filter-heading {
+    color: white;
+    font-size: 2em;
+}
+
+.filter-list {
+    padding: 2em 2em;
+}
+
+label.form-check-label {
+    color: white;
+}

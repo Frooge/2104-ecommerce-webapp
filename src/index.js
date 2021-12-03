@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Products from './page/Products';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/products" element={<Products />}/>
       </Routes>
   </BrowserRouter>,
   document.getElementById('root')
