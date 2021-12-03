@@ -1,8 +1,8 @@
-import Navbar from './components/NavbarMain'
-import Footer from './components/Footer'
-import Hero from './components/Hero'
-import HomeSearch from './components/HomeSearch'
-import ProductsPreview from './components/ProductsPreview'
+import Navbar from './components/shared/NavbarMain'
+import Footer from './components/shared/Footer'
+import Hero from './components/home/Hero'
+import HomeSearch from './components/home/HomeSearch'
+import ProductsPreview from './components/home/ProductsPreview'
 import './App.css'
 
 function App() {

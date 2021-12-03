@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './NavbarMain.css'
 import {Navbar, Nav, Container, Form, FormControl, Button} from 'react-bootstrap'
-import logo from '../img/mf_logo.png'
+import logo from '../../img/mf_logo.png'
 
 class NavbarMain extends Component {
     render() {

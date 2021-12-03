@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import milktea from '../img/milktea.png'
+import milktea from '../../img/milktea.png'
 import {Image} from 'react-bootstrap'
 import './Hero.css'
 
