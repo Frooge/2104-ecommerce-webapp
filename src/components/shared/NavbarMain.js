@@ -47,7 +47,7 @@ class NavbarMain extends Component {
                                     ].join(' ')}>
                                     Products
                                 </Nav.Link>
-                                <Nav.Link href="/" className={[
+                                <Nav.Link href="/cart" className={[
                                     'navbar-content',
                                     'cart' === this.navSelected ? 'active' : ''
                                     ].join(' ')}>

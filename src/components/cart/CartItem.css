@@ -1,0 +1,13 @@
+.CartItem {
+    border: 1px rgb(83, 83, 83) solid;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.CartItem:last-child {
+    margin: none;
+}
+
+.cart-item-image {
+    width: 100%;
+}
