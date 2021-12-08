@@ -7,7 +7,7 @@ import ProductsDisplay from './ProductsDisplay';
 class ProductsMain extends Component {
     render() {
         return (
-            <div className="ProductsMain container">
+            <div className="products-main container">
                 <ProductsSearch />
                 <div className="row">
                     <div className="col-sm-2">

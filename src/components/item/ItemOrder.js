@@ -4,7 +4,7 @@ import './ItemOrder.css'
 export default class ItemOrder extends Component {
     render() {
         return (
-            <div className="ItemOrder">
+            <div className="item-order">
                 <form>
                     <div className="select-item">
                         <input class="form-control w-50" type="text" placeholder="Quantity" />

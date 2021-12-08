@@ -4,7 +4,7 @@ import './ProductsFilter.css'
 class ProductsFilter extends Component {
     render() {
         return (
-            <div className="ProductsFilter bg-dark">
+            <div className="products-filter bg-dark">
                 <div className="container filter-list">
                     <p className="filter-heading">Filters</p>
                     <form>

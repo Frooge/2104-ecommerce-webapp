@@ -5,7 +5,7 @@ import './ProductsSearch.css'
 class ProductsSearch extends Component {
     render() {
         return (
-            <div className="ProductsSearch bg-dark">
+            <div className="products-search bg-dark">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-sm-5">

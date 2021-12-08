@@ -5,7 +5,7 @@ import './ProductsPreview.css'
 class ProductsPreview extends Component {
     render() {
         return (
-            <div className="ProductsPreview container">
+            <div className="products-review container">
                 <Row className="justify-content-around">
                     <Col sm={3}>
                         <a className="product-link" href="/#">

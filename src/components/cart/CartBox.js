@@ -5,7 +5,7 @@ import './CartBox.css'
 export default class CartBox extends Component {
     render() {
         return (
-            <div className="CartBox">
+            <div className="cart-box">
                 <CartItem />
                 <CartItem />
                 <CartItem />

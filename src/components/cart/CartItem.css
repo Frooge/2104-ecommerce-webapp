@@ -1,10 +1,10 @@
-.CartItem {
+.cart-item {
     border: 1px rgb(83, 83, 83) solid;
     padding: 1em;
     margin-bottom: 1em;
 }
 
-.CartItem:last-child {
+.cart-item:last-child {
     margin: none;
 }
 

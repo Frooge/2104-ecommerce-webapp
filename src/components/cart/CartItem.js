@@ -9,7 +9,7 @@ export default class CartItem extends Component {
 
     render() {
         return (
-            <div className="CartItem container">
+            <div className="cart-item container">
                 <div className="row">
                     <div className="col">
                         <img className="cart-item-image" src={this.image} alt="item"/>

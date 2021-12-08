@@ -9,8 +9,8 @@ class ProductCard extends Component {
 
     render() {
         return (
-            <div className="ProductCard col-sm-3">
-                <div className="product-card">
+            <div className="product-card col-sm-3">
+                <div className="product-item">
                     <a className="product-link" href="/products/item">
                         <img className="product-image" src={this.image} alt="product" />
                         <h2>Product Name</h2>

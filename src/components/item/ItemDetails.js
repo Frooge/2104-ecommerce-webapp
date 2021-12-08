@@ -4,7 +4,7 @@ import './ItemDetails.css'
 export default class ItemDetails extends Component {
     render() {
         return (
-            <div className="ItemDetails">
+            <div className="item-details">
                 <h2>Product Name</h2>
                 <p>Store name</p>
                 <h3>Price</h3>

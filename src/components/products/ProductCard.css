@@ -1,12 +1,12 @@
-.ProductCard {
+.product-card {
     margin-bottom: 1.4em;
 }
 
-.product-card {
+.product-item {
     min-height: 300px;
 }
 
-.product-card > * {
+.product-item > * {
     color: white;
 }
 

@@ -6,7 +6,7 @@ import CartCheckout from './CartCheckout'
 export default class CartDisplay extends Component {
     render() {
         return (
-            <div className="CartDisplay container">
+            <div className="cart-display container">
                 <div className="row">
                     <div className="col-10">
                         <h2 className="your-cart">Your cart</h2>

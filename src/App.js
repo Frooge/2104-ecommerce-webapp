@@ -1,5 +1,5 @@
-import NavbarMain from './components/shared/NavbarMain'
-import Footer from './components/shared/Footer'
+import NavbarMain from './components/NavbarMain'
+import Footer from './components/Footer'
 import Hero from './components/home/Hero'
 import HomeSearch from './components/home/HomeSearch'
 import ProductsPreview from './components/home/ProductsPreview'

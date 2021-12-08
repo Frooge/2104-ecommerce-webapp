@@ -10,7 +10,7 @@ class Breadcrumbs extends Component {
 
     render() {
         return (
-            <div className="Breadcrumbs container">
+            <div className="breadcrumbs container">
                 <Breadcrumb className="links">
                     <BreadcrumbItem href="/">Home</BreadcrumbItem>
                     {this.inItem ? (<BreadcrumbItem href="/products">Products</BreadcrumbItem>):(<BreadcrumbItem active>Products</BreadcrumbItem>)}

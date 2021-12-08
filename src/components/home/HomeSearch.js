@@ -5,7 +5,7 @@ import './HomeSearch.css';
 class HomeSearch extends Component {
     render() {
         return (
-            <div className="HomeSearch">
+            <div className="home-search">
                 <div className="container search-container bg-dark">
                     <Form className="container">
                         <div className="row">

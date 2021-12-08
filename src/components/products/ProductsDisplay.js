@@ -5,7 +5,7 @@ import './ProductsDisplay.css'
 class ProductsDisplay extends Component {
     render() {
         return (
-            <div className="ProductsDisplay bg-dark">
+            <div className="products-display bg-dark">
                 <div className="container">
                     <p className="product-heading">Products</p>
                     <div className="row">

@@ -6,6 +6,7 @@ import App from './App';
 import Products from './page/Products';
 import Item from './page/Item';
 import Cart from './page/Cart';
+import Setup from './page/Setup';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Route path="/products" element={<Products />}/>
         <Route path="/products/item" element={<Item />}/>
         <Route path="/cart" element={<Cart />}/>
+        <Route path="/setup" element={<Setup />}/>
       </Routes>
   </BrowserRouter>,
   document.getElementById('root')

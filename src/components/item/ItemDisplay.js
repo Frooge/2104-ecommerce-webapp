@@ -7,7 +7,7 @@ import './ItemDisplay.css'
 export default class ItemDisplay extends Component {
     render() {
         return (
-            <div className="ItemDisplay container">
+            <div className="item-display container">
                 <div className="row">
                     <div className="col">
                         <ItemImage />

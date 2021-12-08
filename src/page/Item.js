@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import NavbarMain from '../components/shared/NavbarMain';
-import Footer from '../components/shared/Footer';
-import Breadcrumbs from '../components/shared/Breadcrumbs';
+import NavbarMain from '../components/NavbarMain';
+import Footer from '../components/Footer';
+import Breadcrumbs from '../components/Breadcrumbs';
 import ItemDisplay from '../components/item/ItemDisplay';
 import ItemSuggest from '../components/item/ItemSuggest';
 
