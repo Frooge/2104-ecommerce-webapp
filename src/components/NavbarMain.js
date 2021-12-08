@@ -54,7 +54,7 @@ class NavbarMain extends Component {
                                     Cart
                                 </Nav.Link>
                             </Nav>
-                            <Button variant="primary">Login</Button>
+                            <Button variant="primary" href="/setup">Login</Button>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

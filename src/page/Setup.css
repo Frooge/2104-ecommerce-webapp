@@ -1,0 +1,16 @@
+.setup {
+    padding: 10em 0;
+}
+
+.form-setup {
+    padding: 2em 2em 0 2em;
+}
+
+.submit-btn {
+    width: 100%;
+    margin: 1em 0;
+}
+
+.setup-link {
+    cursor: pointer;
+}
