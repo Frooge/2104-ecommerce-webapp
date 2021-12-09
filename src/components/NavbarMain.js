@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './NavbarMain.css'
-import {Navbar, Nav, Container, Form, FormControl, Button} from 'react-bootstrap'
+import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap'
 import logo from '../img/mf_logo.png'
+import './NavbarMain.css'
 
 class NavbarMain extends Component {
     constructor(props){
@@ -31,26 +31,20 @@ class NavbarMain extends Component {
                                 </Form>
                                 <Nav.Link href="/" className={[
                                     'navbar-content',
-                                    'home' === this.navSelected ? 'active' : ''
-                                    ].join(' ')}>
+                                    'home' === this.navSelected ? ' active' : ''
+                                    ].join('')}>
                                     Home
-                                </Nav.Link>
-                                <Nav.Link href="/" className={[
-                                    'navbar-content',
-                                    'about' === this.navSelected ? 'active' : ''
-                                    ].join(' ')}>
-                                    About
                                 </Nav.Link>
                                 <Nav.Link href="/products" className={[
                                     'navbar-content',
-                                    'products' === this.navSelected ? 'active' : ''
-                                    ].join(' ')}>
+                                    'products' === this.navSelected ? ' active' : ''
+                                    ].join('')}>
                                     Products
                                 </Nav.Link>
-                                <Nav.Link href="/cart" className={[
+                               <Nav.Link href="/cart" className={[
                                     'navbar-content',
-                                    'cart' === this.navSelected ? 'active' : ''
-                                    ].join(' ')}>
+                                    'cart' === this.navSelected ? ' active' : ''
+                                    ].join('')}>
                                     Cart
                                 </Nav.Link>
                             </Nav>

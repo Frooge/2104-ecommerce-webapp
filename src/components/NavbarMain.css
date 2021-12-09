@@ -11,10 +11,7 @@
 
 .navbar-content {
     margin: 0 0.5em;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: white;
+    color: white !important;
 }
 
 a.active {

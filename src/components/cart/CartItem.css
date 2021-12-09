@@ -1,11 +1,5 @@
 .cart-item {
-    border: 1px rgb(83, 83, 83) solid;
-    padding: 1em;
-    margin-bottom: 1em;
-}
-
-.cart-item:last-child {
-    margin: none;
+    padding: 1em 0;
 }
 
 .cart-item-image {

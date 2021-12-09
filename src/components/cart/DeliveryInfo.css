@@ -1,0 +1,22 @@
+.delivery-check {
+    border: 3px solid rgb(146, 146, 146);
+    border-radius: 0.25em;
+    padding: 1em;
+}
+
+.active-check {
+    border-color: rgb(43, 117, 255);
+}
+
+.delivery-body {
+    padding: 0 3em;
+    margin: auto;
+}
+
+.btn-order {
+    margin-left: auto
+}
+
+.modal-w {
+    max-width: 720px !important;
+}

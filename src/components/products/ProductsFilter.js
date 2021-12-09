@@ -10,19 +10,19 @@ class ProductsFilter extends Component {
                     <form>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label">
+                            <label class="form-check-label check-color">
                                 Milktea
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label">
+                            <label class="form-check-label check-color">
                                 Frappe
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label">
+                            <label class="form-check-label check-color">
                                 Snacks
                             </label>
                         </div>
