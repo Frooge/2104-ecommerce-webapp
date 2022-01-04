@@ -6,6 +6,7 @@ import ProductsPreview from './components/home/ProductsPreview'
 import './App.css'
 
 function App() {
+
   return (
     <div className="App">
       <NavbarMain 

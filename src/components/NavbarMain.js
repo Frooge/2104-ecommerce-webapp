@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, Container, Form, FormControl, Button, OverlayTrigger, Popover } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import NavbarAdmin from './NavbarAdmin'
 import logo from '../img/mf_logo.png'
-import './NavbarMain.css'
+import './Navbar.css'
 
 class NavbarMain extends Component {
     constructor(props){
         super(props);
         this.navSelected = props.navSelected;
+        this.state = {
+            userType: 'admin'
+        }
     }
 
     render() {
@@ -14,9 +19,9 @@ class NavbarMain extends Component {
             <div className="navbar-main">
                 <Navbar variant="light" bg="dark" expand="lg" fixed="top">
                     <Container className="h-100">
-                        <Navbar.Brand href="/">
-                            <img className="navbar-brand" href="#" src={logo} alt="mcford logo"/>
-                        </Navbar.Brand>
+                        <Link to="/" className="navbar-brand">
+                            <img className="navbar-brand" src={logo} alt="mcford logo"/>
+                        </Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
@@ -29,25 +34,43 @@ class NavbarMain extends Component {
                                     />
                                     <Button variant="outline-success">Search</Button>
                                 </Form>
-                                <Nav.Link href="/" className={[
-                                    'navbar-content',
+                                <Link to="/"
+                                className={[
+                                    'navbar-content nav-link',
                                     'home' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Home
-                                </Nav.Link>
-                                <Nav.Link href="/products" className={[
-                                    'navbar-content',
+                                    Home <i class="fas fa-home"></i>
+                                </Link>
+                                <Link to="/products"
+                                className={[
+                                    'navbar-content nav-link',
                                     'products' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Products
-                                </Nav.Link>
-                               <Nav.Link href="/cart" className={[
-                                    'navbar-content',
+                                    Products <i class="fas fa-hamburger"></i>
+                                </Link>
+                                <Link to="/cart"
+                                className={[
+                                    'navbar-content nav-link',
                                     'cart' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Cart
-                                </Nav.Link>
+                                    Cart <i class="fas fa-shopping-cart"></i>
+                                </Link>
+                                <OverlayTrigger
+                                trigger="click"
+                                placement="bottom"
+                                overlay={
+                                    <Popover id={`popover-positioned-bottom`}>
+                                    <Popover.Header as="h3">Store Location</Popover.Header>
+                                    <Popover.Body>
+                                        <strong>Holy guacamole! Holy guacamole! Holy guacamole!</strong> Check this info.
+                                    </Popover.Body>
+                                    </Popover>
+                                }
+                                >
+                                    <Button variant="warning">Store Location <i class="fas fa-store"></i></Button>
+                                </OverlayTrigger>
                             </Nav>
+                            <NavbarAdmin key='admin' userType={this.state.userType} navSelected={this.navSelected} />
                             <Button variant="primary" href="/setup">Login</Button>
                         </Navbar.Collapse>
                     </Container>

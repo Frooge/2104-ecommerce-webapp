@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import './ProductCard.css'
 
 class ProductCard extends Component {
@@ -11,12 +12,12 @@ class ProductCard extends Component {
         return (
             <div className="product-card col-sm-3">
                 <div className="product-item">
-                    <a className="product-link" href="/products/item">
+                    <Link className="product-link" to="/products/item">
                         <img className="product-image" src={this.image} alt="product" />
                         <h2>Product Name</h2>
                         <p>Store name</p>
                         <h3>Price</h3>
-                    </a>
+                    </Link>
                 </div>
             </div>
         )
