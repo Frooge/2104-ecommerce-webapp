@@ -1,16 +1,41 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import $ from 'jquery'
 import './Signup.css'
 
 export default class Signup extends Component {
-    constructor(props){
-        super(props);
 
+    handleFormSubmit(e) {
+        e.preventDefault();
+
+        let value = $('signup-form').serializeArray(),
+        obj = {};
+        $(value).each(function(i , field){
+            obj[field.name] = field.value;
+        });
+
+        let data = new FormData();
+        data.append('typeID', 1);
+        data.append('email', obj["email"]);
+        data.append('password', obj["password"]);
+        data.append('fullname', `${obj["first-name"]} ${obj["last-name"]}`);
+        data.append('birthdate', obj["bdate"]);
+        data.append('address', obj["address"]);
+        data.append('contact', obj["contact"]);
+
+        axios.post('localhost/2104-ecommerce-webapp/src/api/account.php', data)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((res) => {
+            console.log(res);
+        });
     }
 
     render() {
         return (
             <div className="signup">
-                <form className="form-setup">
+                <form className="form-setup" id="signup-form">
                     <h2 className="mb-3">Sign up</h2>
                     <div className="row form-row mb-3">
                         <div className="form-group col">

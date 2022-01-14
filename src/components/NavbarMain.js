@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container, Form, FormControl, Button, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import $ from 'jquery'
 import NavbarAdmin from './NavbarAdmin'
 import logo from '../img/mf_logo.png'
 import './Navbar.css'
@@ -10,8 +12,23 @@ class NavbarMain extends Component {
         super(props);
         this.navSelected = props.navSelected;
         this.state = {
+            name: 'pls work',
             userType: 'admin'
         }
+    }
+
+    componentDidMount() {
+        let value = '?userID=1';
+        axios.get(`http://localhost:80/2104-ecommerce-webapp/api/account.php${value}`)
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                name: res.data.Fullname
+            })
+        })
+        .catch((res) => {
+            console.log(res);
+        })
     }
 
     render() {
@@ -39,21 +56,21 @@ class NavbarMain extends Component {
                                     'navbar-content nav-link',
                                     'home' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Home <i class="fas fa-home"></i>
+                                    Home <i className="fas fa-home"></i>
                                 </Link>
                                 <Link to="/products"
                                 className={[
                                     'navbar-content nav-link',
                                     'products' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Products <i class="fas fa-hamburger"></i>
+                                    Products <i className="fas fa-hamburger"></i>
                                 </Link>
                                 <Link to="/cart"
                                 className={[
                                     'navbar-content nav-link',
                                     'cart' === this.navSelected ? ' active' : ''
                                     ].join('')}>
-                                    Cart <i class="fas fa-shopping-cart"></i>
+                                    Cart <i className="fas fa-shopping-cart"></i>
                                 </Link>
                                 <OverlayTrigger
                                 trigger="click"
@@ -67,9 +84,10 @@ class NavbarMain extends Component {
                                     </Popover>
                                 }
                                 >
-                                    <Button variant="warning">Store Location <i class="fas fa-store"></i></Button>
+                                    <Button variant="warning">Store Location <i className="fas fa-store"></i></Button>
                                 </OverlayTrigger>
                             </Nav>
+                            <p style={{color:'red'}}>hello {this.state.name}</p>
                             <NavbarAdmin key='admin' userType={this.state.userType} navSelected={this.navSelected} />
                             <Button variant="primary" href="/setup">Login</Button>
                         </Navbar.Collapse>
