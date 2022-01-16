@@ -7,6 +7,7 @@ import './Signin.css'
 class Signin extends Component {
     constructor(props){
         super(props);
+        this.change = props.change;
         this.navigate = props.navigate;
     }
 
@@ -27,7 +28,7 @@ class Signin extends Component {
                 alert("Incorrect email or password");
             }
             else {
-                alert("successful");
+                alert("Successful");
                 this.navigate('/');
             }
         })
@@ -67,7 +68,7 @@ class Signin extends Component {
                 </form>
                 <hr />
                 <div className="row justify-content-center">
-                    <p className="offset-4">Don't have an account? <span className="setup-link text-primary" onClick={() => this.props.change("signup")}>Register</span></p>
+                    <p className="offset-4">Don't have an account? <span className="setup-link text-primary" onClick={() => this.change("signup")}>Register</span></p>
                 </div>
             </div>
         )
@@ -77,5 +78,5 @@ class Signin extends Component {
 export default function(props) {
     const navigate = useNavigate();
 
-    return <Signin navigate={navigate} />
+    return <Signin navigate={navigate} change={props.change} />
 }

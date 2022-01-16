@@ -2,6 +2,7 @@
     include_once('db_connect.php');
 
     $method = $_SERVER['REQUEST_METHOD'];
+    $valid = true;
 
     switch ($method) {
         case 'GET':
@@ -16,18 +17,30 @@
             $birthdate = $_POST["birthdate"];
             $address = $_POST["address"];
             $contact = $_POST["contact"];
-        
-            $sql = "insert into users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) values ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
+
+            $stmt = $con->prepare("SELECT * FROM users WHERE Email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if($res->num_rows > 0){
+                $valid = false;
+            }
+            else {
+                $sql = "insert into users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) values ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
+            }
             break;
     }
 
-    // run SQL statement
-    $result = mysqli_query($con,$sql);
+    $result = false;
+    if($valid){
+        // run SQL statement
+        $result = mysqli_query($con,$sql);
 
-    // die if SQL statement failed
-    if (!$result) {
-        http_response_code(404);
-        die(mysqli_error($con));
+        // die if SQL statement failed
+        if (!$result) {
+            http_response_code(404);
+            die(mysqli_error($con));
+        }
     }
 
     if ($method == 'GET') {
