@@ -8,22 +8,22 @@ export default class Signup extends Component {
     handleFormSubmit(e) {
         e.preventDefault();
 
-        let value = $('signup-form').serializeArray(),
-        obj = {};
-        $(value).each(function(i , field){
-            obj[field.name] = field.value;
-        });
+        // let value = $('signup-form').serializeArray(),
+        // obj = {};
+        // $(value).each(function(i , field){
+        //     obj[field.name] = field.value;
+        // });
 
-        let data = new FormData();
-        data.append('typeID', 1);
-        data.append('email', obj["email"]);
-        data.append('password', obj["password"]);
-        data.append('fullname', `${obj["first-name"]} ${obj["last-name"]}`);
-        data.append('birthdate', obj["bdate"]);
-        data.append('address', obj["address"]);
-        data.append('contact', obj["contact"]);
+        // let data = new FormData();
+        // data.append('typeID', 1);
+        // data.append('email', obj["email"]);
+        // data.append('password', obj["password"]);
+        // data.append('fullname', `${obj["first-name"]} ${obj["last-name"]}`);
+        // data.append('birthdate', obj["bdate"]);
+        // data.append('address', obj["address"]);
+        // data.append('contact', obj["contact"]);
 
-        axios.post('localhost/2104-ecommerce-webapp/src/api/account.php', data)
+        axios.post(`${require('../../config/api')}account.php`, new FormData($('#signup-form')))
         .then((res) => {
             console.log(res);
         })

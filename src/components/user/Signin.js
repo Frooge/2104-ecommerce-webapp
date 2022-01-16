@@ -1,40 +1,62 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import $ from 'jquery'
 import './Signin.css'
 
 export default class Signin extends Component {
-    constructor(props){
-        super(props);
+
+    handleFormSubmit(e) {
+        e.preventDefault();
         
+        let value = $('#signin-form').serializeArray(),
+        obj = {};
+        $(value).each(function(i , field){
+            obj[field.name] = field.value;
+        });
+
+        axios.get(`${require('../../config/api')}verification.php?email=${obj['email']}&password=${obj['password']}`)
+        .then((res) => {
+            console.log(res);
+            if(!res.data){
+                alert("Incorrect email or password");
+            }
+            else {
+                alert("successful");
+            }
+        })
+        .catch((res) => {
+            console.log(res);
+        });
     }
 
     render() {
         return (
             <div className="signin">
-                <form className="form-setup">
+                <form className="form-setup" id="signin-form">
                     <h2 className="mb-4">Sign in</h2>
-                    <button class="btn btn-primary d-block mb-3 w-100"> <i class="fab fa-facebook-f"></i> &nbsp;  Sign in with Facebook</button>
-                    <button class="btn btn-danger d-block mb-4 w-100"> <i class="fab fa-google"></i> &nbsp;  Sign in with Google</button>
+                    <button className="btn btn-primary d-block mb-3 w-100"> <i className="fab fa-facebook-f"></i> &nbsp;  Sign in with Facebook</button>
+                    <button className="btn btn-danger d-block mb-4 w-100"> <i className="fab fa-google"></i> &nbsp;  Sign in with Google</button>
                     <div className="form-group mb-3">
                         <div className="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text h-100">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text h-100">
                                     <i className="fa fa-user" />
                                 </span>
                             </div>
-                            <input name="email "type="email" class="form-control" placeholder="Username" required/>
+                            <input name="email" type="email" className="form-control" placeholder="Username" required/>
                         </div>
                     </div>
                     <div className="form-group mb-2">
                         <div className="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text h-100">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text h-100">
                                     <i className="fa fa-lock" />
                                 </span>
                             </div>
-                            <input name="password "type="password" class="form-control" placeholder="Password" required/>
+                            <input name="password" type="password" className="form-control" placeholder="Password" required/>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary submit-btn">Log In</button>
+                    <button type="submit" className="btn btn-primary submit-btn" onClick={this.handleFormSubmit}>Log In</button>
                 </form>
                 <hr />
                 <div className="row justify-content-center">

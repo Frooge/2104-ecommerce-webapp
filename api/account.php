@@ -5,20 +5,20 @@
 
     switch ($method) {
         case 'GET':
-          $id = $_GET['userID'];
-          $sql = "select * from users".($id?" where UserID=$id":''); 
-          break;
+            $id = $_GET['userID'];
+            $sql = "select * from users".($id?" where UserID=$id":''); 
+            break;
         case 'POST':
-          $typeID = $_POST["typeID"];
-          $email = $_POST["email"];
-          $password = $_POST["password"];
-          $fullname = $_POST["fullname"];
-          $birthdate = $_POST["birthdate"];
-          $address = $_POST["address"];
-          $contact = $_POST["contact"];
-    
-          $sql = "insert into users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) values ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
-          break;
+            $typeID = $_POST["typeID"];
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $fullname = $_POST["fullname"];
+            $birthdate = $_POST["birthdate"];
+            $address = $_POST["address"];
+            $contact = $_POST["contact"];
+        
+            $sql = "insert into users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) values ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
+            break;
     }
 
     // run SQL statement

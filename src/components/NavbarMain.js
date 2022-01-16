@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Navbar, Nav, Container, Form, FormControl, Button, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import $ from 'jquery'
 import NavbarAdmin from './NavbarAdmin'
 import logo from '../img/mf_logo.png'
 import './Navbar.css'
@@ -11,19 +10,42 @@ class NavbarMain extends Component {
     constructor(props){
         super(props);
         this.navSelected = props.navSelected;
+        this.type = {
+           1: 'customer',
+           2: 'owner',
+           3: 'admin' 
+        }
         this.state = {
-            name: 'pls work',
-            userType: 'admin'
+            id: null,
+            name: null,
+            userType: null
         }
     }
 
     componentDidMount() {
-        let value = '?userID=1';
-        axios.get(`http://localhost:80/2104-ecommerce-webapp/api/account.php${value}`)
+        this.getSession()
+        .then(() => {
+            this.getUser();
+        })
+    }
+
+    getSession() {
+        return axios.get(`${require('../config/api')}session.php`, {credentials: "same-origin"})
         .then((res) => {
             console.log(res);
             this.setState({
-                name: res.data.Fullname
+                id: res.data.session.id
+            })
+        })
+    }
+
+    getUser() {
+        axios.get(`${require('../config/api')}account.php?userID=${this.state.id}`)
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                name: res.data.Fullname,
+                userType: this.type[res.data.UserTypeID]
             })
         })
         .catch((res) => {
@@ -87,7 +109,6 @@ class NavbarMain extends Component {
                                     <Button variant="warning">Store Location <i className="fas fa-store"></i></Button>
                                 </OverlayTrigger>
                             </Nav>
-                            <p style={{color:'red'}}>hello {this.state.name}</p>
                             <NavbarAdmin key='admin' userType={this.state.userType} navSelected={this.navSelected} />
                             <Button variant="primary" href="/setup">Login</Button>
                         </Navbar.Collapse>

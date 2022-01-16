@@ -11,13 +11,13 @@ export default class Sidenav extends Component {
                 <h2>Mcford Milktea</h2>
                 </div>
                 <hr />
-                <a>Transaction</a>
+                <p>Transaction</p>
                 <hr />
-                <a>Delivery</a>
+                <p>Delivery</p>
                 <hr />
-                <a>Products</a>
+                <p>Products</p>
                 <hr />
-                <a>Graph</a>
+                <p>Graph</p>
             </div>
         )
     }
