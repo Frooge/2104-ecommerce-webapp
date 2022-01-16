@@ -8,10 +8,10 @@ export default function NavbarAdmin(props) {
         return (
             <Link to="/dashboard"
                 className={[
-                'navbar-content nav-link',
+                'navbar-dashboard nav-link',
                 'dashboard' === props.navSelected ? ' active' : ''
                 ].join('')}>
-                Admin Dashboard
+                Dashboard
             </Link>
         )
     } else {

@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { useNavigate } from 'react-router'
 import axios from 'axios'
 import $ from 'jquery'
 import './Signin.css'
 
-export default class Signin extends Component {
+class Signin extends Component {
+    constructor(props){
+        super(props);
+        this.navigate = props.navigate;
+    }
 
-    handleFormSubmit(e) {
+
+    handleFormSubmit = (e) => {
         e.preventDefault();
-        
+
         let value = $('#signin-form').serializeArray(),
         obj = {};
         $(value).each(function(i , field){
@@ -22,6 +28,7 @@ export default class Signin extends Component {
             }
             else {
                 alert("successful");
+                this.navigate('/');
             }
         })
         .catch((res) => {
@@ -65,4 +72,10 @@ export default class Signin extends Component {
             </div>
         )
     }
+}
+
+export default function(props) {
+    const navigate = useNavigate();
+
+    return <Signin navigate={navigate} />
 }

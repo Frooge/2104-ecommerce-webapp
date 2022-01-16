@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container, Form, FormControl, Button, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import axios from 'axios'
 import NavbarAdmin from './NavbarAdmin'
+import NavbarUser from './NavbarUser'
 import logo from '../img/mf_logo.png'
 import './Navbar.css'
 
@@ -10,13 +12,13 @@ class NavbarMain extends Component {
     constructor(props){
         super(props);
         this.navSelected = props.navSelected;
+        this.navigate = props.navigate;
         this.type = {
            1: 'customer',
            2: 'owner',
            3: 'admin' 
         }
         this.state = {
-            id: null,
             name: null,
             userType: null
         }
@@ -50,6 +52,15 @@ class NavbarMain extends Component {
         })
         .catch((res) => {
             console.log(res);
+        })
+    }
+
+    logoutAccount = (e) => {
+        e.preventDefault();
+        axios.get(`${require('../config/api')}logout.php`, {credentials: "same-origin"})
+        .then(() => {
+            alert("Logout successfully");
+            this.navigate('/setup');
         })
     }
 
@@ -110,7 +121,7 @@ class NavbarMain extends Component {
                                 </OverlayTrigger>
                             </Nav>
                             <NavbarAdmin key='admin' userType={this.state.userType} navSelected={this.navSelected} />
-                            <Button variant="primary" href="/setup">Login</Button>
+                            <NavbarUser key='user' name={this.state.name} logout={this.logoutAccount}/>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
@@ -119,4 +130,8 @@ class NavbarMain extends Component {
     }
 }
 
-export default NavbarMain
+export default function(props) {
+    const navigate = useNavigate();
+
+    return <NavbarMain navigate={navigate} />
+}

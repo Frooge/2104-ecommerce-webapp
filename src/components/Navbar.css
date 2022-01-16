@@ -18,6 +18,11 @@
     color: rgb(252, 78, 130) !important;
 }
 
+.navbar-user {
+    text-align: right;
+    padding-right: 0 !important;
+}
+
 a.active {
     color: turquoise !important;
 }
