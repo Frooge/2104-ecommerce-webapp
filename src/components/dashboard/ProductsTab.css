@@ -8,3 +8,7 @@
 .products-tab-items {
     margin-top: 1em !important;
 }
+
+.products-image {
+    width: 100%;
+}

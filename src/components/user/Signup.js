@@ -38,8 +38,8 @@ export default class Signup extends Component {
                     this.props.change("signin");
                 }
             })
-            .catch((res) => {
-                console.log(res);
+            .catch((err) => {
+                console.log(err);
             });
         }
     }

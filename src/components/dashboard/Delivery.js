@@ -7,10 +7,10 @@ export default class Delivery extends Component {
             <div className="delivery">
                 <div className="row">
                     <span className="col-10">
-                        <h3>All Deliveries</h3>
+                        <h3>Delivery Requests</h3>
                     </span>
-                    <div className="col-2 align-self-center">
-                        <button className="btn btn-primary w">VIEW ALL</button>
+                    <div className="col-2 dash-btn">
+                        <button className="btn btn-primary w-100">VIEW ALL</button>
                     </div>
                 </div>
                 <hr />

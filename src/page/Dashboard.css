@@ -2,3 +2,11 @@
     padding: 0 10em;
     color: white;
 }
+
+.modal-view-w {
+    max-width: 1080px !important;
+}
+
+.dash-btn {
+    text-align: right;
+}

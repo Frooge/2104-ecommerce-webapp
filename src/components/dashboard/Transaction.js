@@ -7,10 +7,10 @@ export default class Transaction extends Component {
             <div className="transaction">
                 <div className="row">
                     <span className="col-10">
-                        <h3>Latest Transactions</h3>
+                        <h3>Transactions</h3>
                     </span>
-                    <div className="col-2 align-self-center">
-                        <button className="btn btn-primary w">VIEW ALL</button>
+                    <div className="col-2 dash-btn">
+                        <button className="btn btn-primary w-100">VIEW ALL</button>
                     </div>
                 </div>
                 <hr />

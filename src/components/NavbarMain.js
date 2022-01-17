@@ -50,8 +50,8 @@ class NavbarMain extends Component {
                 userType: this.type[res.data.UserTypeID]
             })
         })
-        .catch((res) => {
-            console.log(res);
+        .catch((err) => {
+            console.log(err);
         })
     }
 

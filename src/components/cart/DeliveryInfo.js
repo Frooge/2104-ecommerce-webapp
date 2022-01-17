@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Form } from 'react-bootstrap'
 import './DeliveryInfo.css'
 
 export default class DeliveryInfo extends Component {

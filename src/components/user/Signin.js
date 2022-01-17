@@ -32,9 +32,14 @@ class Signin extends Component {
                 this.navigate('/');
             }
         })
-        .catch((res) => {
-            console.log(res);
+        .catch((err) => {
+            console.log(err);
         });
+    }
+
+    handle3rdParty = (e) => {
+        e.preventDefault();
+        this.navigate('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
     }
 
     render() {
@@ -42,8 +47,8 @@ class Signin extends Component {
             <div className="signin">
                 <form className="form-setup" id="signin-form">
                     <h2 className="mb-4">Sign in</h2>
-                    <button className="btn btn-primary d-block mb-3 w-100"> <i className="fab fa-facebook-f"></i> &nbsp;  Sign in with Facebook</button>
-                    <button className="btn btn-danger d-block mb-4 w-100"> <i className="fab fa-google"></i> &nbsp;  Sign in with Google</button>
+                    <button className="btn btn-primary d-block mb-3 w-100" onClick={this.handle3rdParty}> <i className="fab fa-facebook-f"></i> &nbsp;  Sign in with Facebook</button>
+                    <button className="btn btn-danger d-block mb-4 w-100" onClick={this.handle3rdParty}> <i className="fab fa-google"></i> &nbsp;  Sign in with Google</button>
                     <div className="form-group mb-3">
                         <div className="input-group">
                             <div className="input-group-prepend">
