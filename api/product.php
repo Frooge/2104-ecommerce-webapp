@@ -4,14 +4,15 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if($method == 'GET'){
-        if(isset($_GET["search"]) && $_GET["search"] != ''){
+        if(isset($_GET["search"])){
             $name = $_GET["search"];
+            $term = '%'.str_replace(' ','%',$name).'%';
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type
                     ON products.ProductTypeID = product_type.ProductTypeID
                     LEFT JOIN stores
                     ON products.StoreID = stores.StoreID
-                    WHERE products.ProductName LIKE '$name'";
+                    WHERE products.ProductName LIKE '$term'";
         }
         else {
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
@@ -21,10 +22,8 @@
                     ON products.StoreID = stores.StoreID"; 
         }
         
-        // run SQL statement
         $result = mysqli_query($con,$sql);
 
-        // die if SQL statement failed
         if (!$result) {
             http_response_code(404);
             die(mysqli_error($con));
@@ -37,42 +36,72 @@
         echo ']';
     }
     else if($method == 'POST'){
-        $typeID = $_POST["typeID"];
-        $storeID = $_POST["storeID"];
-        $name = $_POST["name"];
-        $price = $_POST["price"];
-        $size = $_POST["size"];
-        $description = $_POST["description"];
-        $image = basename($_FILES["image"]["name"]);
-
         $result = false;
         $message = '';
         $valid = true;
+
+        $image = basename($_FILES["image"]["name"]);
         $target_dir = "../src/img/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $uploadFile = true;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-        // Check if file already exists
+        // Check if image file already exists
         if (file_exists($target_file)) {
             $message = "File already exists.";
             $uploadFile = false;
         }
 
-        // if everything is ok, try to upload file
         if($uploadFile) {
             if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                 $message = "An error occured when uploading your file.";
                 $valid = false;
             }
+            else {
+                $message = "Successful file upload";
+            }
         }
 
         if($image == ''){
-            $image = 'placeholder.png';
+            if(!isset($_POST["id"])){
+                $image = 'placeholder.png';
+            }
+            else{
+                $id = $_POST["id"];
+                $stmt = $con->prepare("SELECT * FROM products WHERE ProductID = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+
+                if($result && $result->num_rows > 0){ 
+                    $obj = mysqli_fetch_object($result);
+                    $image = $obj->ProductImage;
+                }
+                else {
+                    http_response_code(404);
+                    die(mysqli_error($con));
+                }
+            }
         }
 
         if($valid){
-            $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, Size, Price, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', '$size', $price, '$description', '$image', 1)";
+            $sql = '';
+            $typeID = $_POST["typeID"];
+            $storeID = $_POST["storeID"];
+            $name = $_POST["name"];
+            $price = $_POST["price"];
+            $size = $_POST["size"];
+            $description = $_POST["description"];
+
+            if(!isset($_POST["id"])){
+                $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, Size, Price, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', '$size', $price, '$description', '$image', 1)";
+            }
+            else{
+                $id = $_POST["id"];
+                $available = $_POST["available"];
+                $sql = "UPDATE products SET ProductTypeID=$typeID, StoreID=$storeID, ProductName='$name', Size='$size', Price=$price, Description='$description', ProductImage='$image', isAvailable=$available WHERE ProductID = $id";
+            }
 
             // run SQL statement
             $result = mysqli_query($con, $sql);
@@ -91,6 +120,6 @@
         echo json_encode($ret);
     }
     else {
-        die();
+        die("Wrong request method");
     }
 ?>

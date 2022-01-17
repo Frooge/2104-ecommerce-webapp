@@ -20,7 +20,6 @@ export default class ProductsTab extends Component {
     }
 
     getProducts = () => {
-        console.log("hello", this.state.search);
         axios.get(`${require('../../config/api')}product.php?search=${this.state.search}`)
         .then((res) => {
             console.log(res);
@@ -32,6 +31,13 @@ export default class ProductsTab extends Component {
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    updateDisplay = (e) => {
+        this.setState({
+            isLoadingProducts: true,
+            search: ''
+        }, this.getProducts);
     }
 
     handleSearch = (e) => {
@@ -67,72 +73,72 @@ export default class ProductsTab extends Component {
                         <Button type="submit" variant="success">Search</Button>
                     </Form>
                     <div className="col-2 dash-btn">
-                        <ProductsTabModal content="ADD"/>
+                        <ProductsTabModal content="ADD" updateDisplay={this.updateDisplay}/>
                     </div>
                 </div>
                 <hr />
-                <div className="row">
-                    <div className="col">
-                        <label><strong>ID</strong></label>
+                <div>
+                    <div className="row">
+                        <div className="col-1">
+                            <label><strong>ID</strong></label>
+                        </div>
+                        <div className="col-1">
+                            <label><strong>Type</strong></label>
+                        </div>
+                        <div className="col">
+                            <label><strong>Store</strong></label>
+                        </div>
+                        <div className="col">
+                            <label><strong>Name</strong></label>
+                        </div>
+                        <div className="col-1">
+                            <label><strong>Size</strong></label>
+                        </div>
+                        <div className="col-1">
+                            <label><strong>Price</strong></label>
+                        </div>
+                        <div className="col-1">
+                            <label><strong>Available</strong></label>
+                        </div>
+                        <div className="col">
+                            <label><strong>Description</strong></label>
+                        </div>
+                        <div className="col-1" />
                     </div>
-                    <div className="col">
-                        <label><strong>Type</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Store</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Name</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Size</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Price</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Available</strong></label>
-                    </div>
-                    <div className="col">
-                        <label><strong>Description</strong></label>
-                    </div>
-                    <div className="col" />
-                </div>
-                <br />
-                <div style={{textAlign:'center'}}>
+                    <br />
                     { (this.state.isLoadingProducts)?
                         (
-                            <Spinner animation="border" role="status">
+                            <Spinner animation="border" role="status"  style={{textAlign:'center'}}>
                                 <span className="visually-hidden">Loading...</span>
                             </Spinner>
-                        ) : this.state.products.map((p) => (
-                                <div className="row" key={p.ProductID}>
-                                    <div className="col">
+                        ) : this.state.products.map((p, index) => (
+                                <div className="row product-display-row" key={p.ProductID} style={{backgroundColor:(index%2)?'#324052':'#4e5e73'}}>
+                                    <div className="col-1 align-self-center">
                                         <label>{p.ProductID}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col-1 align-self-center">
                                         <label>{p.TypeName}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col align-self-center">
                                         <label>{p.StoreName}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col align-self-center">
                                         <label>{p.ProductName}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col-1 align-self-center">
                                         <label>{p.Size}</label>
                                     </div>
-                                    <div className="col">
-                                        <label>{p.Price}</label>
+                                    <div className="col-1 align-self-center">
+                                        <label>{'₱' + p.Price}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col-1 align-self-center">
                                         <label>{(p.isAvailable === "1")? "YES" : "NO"}</label>
                                     </div>
-                                    <div className="col">
+                                    <div className="col align-self-center">
                                         <label>{p.Description}</label>
                                     </div>
-                                    <div className="col  dash-btn">
-                                        <ProductsTabModal content="EDIT" product={p}/>
+                                    <div className="col-1 dash-btn align-self-center">
+                                        <ProductsTabModal content="EDIT" product={p} updateDisplay={this.updateDisplay}/>
                                     </div>
                                 </div>
                             )

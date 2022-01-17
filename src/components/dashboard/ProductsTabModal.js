@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import axios from 'axios'
 
-export default function ProductsTabModal({content, product}) {
+export default function ProductsTabModal({content, product, updateDisplay}) {
     const [show, setShow] = useState(false);
     const isProduct = typeof product !== 'undefined';
     const image = (isProduct)?
@@ -26,6 +26,13 @@ export default function ProductsTabModal({content, product}) {
     (
         <button type="submit" className="btn btn-danger w-25" >Add Product</button>
     );
+    const modalBtn = (isProduct)?
+    (
+        <span onClick={() => setShow(true)}><i className="fas fa-edit" /></span>
+    ):
+    (
+        <button className="btn btn-primary w-100" onClick={() => setShow(true)}>{content}</button>
+    );
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -34,25 +41,29 @@ export default function ProductsTabModal({content, product}) {
             axios.post(`${require('../../config/api')}product.php`, new FormData(document.getElementById(`${content}-form`)))
             .then((res) => {
                 console.log(res);
+                alert("Successfully Added");
+                setShow(false);
+                updateDisplay();
             })
             .catch((err) => {
                 console.log(err);
+                alert("An error occured");
             })
         }
         else if(content === 'EDIT' && isProduct){
             let data = new FormData(document.getElementById(`${content}-form`));
             data.append('id', product.ProductID);
 
-            for (var pair of data.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]); 
-            }
-
-            axios.post(`${require('../../config/api')}product_update.php`, data)
+            axios.post(`${require('../../config/api')}product.php`, data)
             .then((res) => {
                 console.log(res);
+                alert("Successfully Updated");
+                setShow(false);
+                updateDisplay();
             })
             .catch((err) => {
                 console.log(err);
+                alert("An error occured");
             })
         }
         else {
@@ -64,7 +75,7 @@ export default function ProductsTabModal({content, product}) {
 
     return (
         <div>
-            <button className="btn btn-primary w-100" onClick={() => setShow(true)}>{content}</button>
+            {modalBtn}
 
             <Modal
                 show={show}

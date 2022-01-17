@@ -7,7 +7,7 @@
     switch ($method) {
         case 'GET':
             $id = $_GET['userID'];
-            $sql = "select * from users".($id?" where UserID=$id":''); 
+            $sql = "SELECT * FROM users".($id?" where UserID=$id":''); 
             break;
         case 'POST':
             $typeID = $_POST["typeID"];
@@ -26,8 +26,9 @@
                 $valid = false;
             }
             else {
-                $sql = "insert into users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) values ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
+                $sql = "INSERT INTO users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) VALUES ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
             }
+            
             break;
     }
 
