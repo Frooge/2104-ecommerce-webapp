@@ -4,11 +4,11 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if($method == 'GET'){
-        $sql = "SELECT products.*, product_type.TypeName, product_details.Description, product_details.ProductImage FROM products
+        $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                 LEFT JOIN product_type
                 ON products.ProductTypeID = product_type.ProductTypeID
-                LEFT JOIN product_details
-                ON products.ProductName = product_details.ProductName"; 
+                LEFT JOIN stores
+                ON products.StoreID = stores.StoreID"; 
 
         // run SQL statement
         $result = mysqli_query($con,$sql);
@@ -19,18 +19,20 @@
             die(mysqli_error($con));
         }
 
+        echo '[';
         for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
             echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
         }
+        echo ']';
     }
     else if($method == 'POST'){
         $typeID = $_POST["typeID"];
         $storeID = $_POST["storeID"];
         $name = $_POST["name"];
+        $price = $_POST["price"];
+        $size = $_POST["size"];
         $description = $_POST["description"];
         $image = basename($_FILES["image"]["name"]);
-        $regular = $_POST["price-regular"];
-        $large = $_POST["price-large"];
 
         $result = false;
         $message = '';
@@ -54,14 +56,15 @@
             }
         }
 
+        if($image == ''){
+            $image = 'placeholder.png';
+        }
+
         if($valid){
-            $sql = "INSERT INTO product_details (ProductName, Description, ProductImage) VALUES ('$name', '$description', '$image');
-                    INSERT INTO products (ProductTypeID, StoreID, ProductName, Size, Price, isAvailable) VALUES
-                    ($typeID, $storeID, '$name', 'Regular', $regular, 1),
-                    ($typeID, $storeID, '$name', 'Large', $large, 1);";
+            $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, Size, Price, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', '$size', $price, '$description', '$image', 1)";
 
             // run SQL statement
-            $result = $con->multi_query($sql);
+            $result = mysqli_query($con, $sql);
 
             // die if SQL statement failed
             if (!$result) {

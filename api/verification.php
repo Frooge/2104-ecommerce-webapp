@@ -9,6 +9,7 @@
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
+    $stmt->close();
 
     if (!$result) {
         http_response_code(404);
