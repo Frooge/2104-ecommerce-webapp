@@ -4,12 +4,23 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if($method == 'GET'){
-        $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
-                LEFT JOIN product_type
-                ON products.ProductTypeID = product_type.ProductTypeID
-                LEFT JOIN stores
-                ON products.StoreID = stores.StoreID"; 
-
+        if(isset($_GET["search"]) && $_GET["search"] != ''){
+            $name = $_GET["search"];
+            $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
+                    LEFT JOIN product_type
+                    ON products.ProductTypeID = product_type.ProductTypeID
+                    LEFT JOIN stores
+                    ON products.StoreID = stores.StoreID
+                    WHERE products.ProductName LIKE '$name'";
+        }
+        else {
+            $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
+                    LEFT JOIN product_type
+                    ON products.ProductTypeID = product_type.ProductTypeID
+                    LEFT JOIN stores
+                    ON products.StoreID = stores.StoreID"; 
+        }
+        
         // run SQL statement
         $result = mysqli_query($con,$sql);
 
