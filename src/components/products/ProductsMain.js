@@ -13,7 +13,8 @@ export default class ProductsMain extends Component {
                 milktea: true,
                 frappe: true,
                 snack: true
-            }
+            },
+            results: 0
         }
     }
 
@@ -56,18 +57,24 @@ export default class ProductsMain extends Component {
                 snack: setSnack
             }
         })
-    } 
+    }
+
+    setResults = (res) => {
+        this.setState({
+            results: res
+        })
+    }
 
     render() {
         return (
             <div className="products-main container">
-            <ProductsSearch setSearch={this.setSearch}/>
+            <ProductsSearch setSearch={this.setSearch} results={this.state.results}/>
             <div className="row">
                 <div className="col-sm-2">
                     <ProductsFilter setFilter={this.setFilter}/>
                 </div>
                 <div className="col-sm-10">
-                    <ProductsDisplay key={this.state.search.query + this.state.search.milktea  + this.state.search.frappe  + this.state.search.snack} search={this.state.search} />
+                    <ProductsDisplay key={this.state.search.query + this.state.search.milktea  + this.state.search.frappe  + this.state.search.snack} search={this.state.search}  setResults={this.setResults}/>
                 </div>
             </div>
         </div>

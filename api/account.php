@@ -24,8 +24,7 @@
             $res = $stmt->get_result();
             if($res->num_rows > 0){
                 $valid = false;
-            }
-            else {
+            } else {
                 $sql = "INSERT INTO users (UserTypeID, Email, Password, Fullname, Birthdate, Address, ContactNum) VALUES ('$typeID', '$email', '$password', '$fullname', '$birthdate', '$address', '$contact')"; 
             }
             
@@ -50,11 +49,9 @@
         echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
         }
         if (!$id) echo ']';
-    }
-    elseif ($method == 'POST') {
+    } elseif ($method == 'POST') {
         echo json_encode($result);
-    }
-    else {
+    } else {
         echo mysqli_affected_rows($con);
     }
 ?>

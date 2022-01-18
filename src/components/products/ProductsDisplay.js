@@ -21,11 +21,11 @@ class ProductsDisplay extends Component {
     getProducts = () => {
         axios.get(`${require('../../config/api')}product_search.php?search=${this.search.query}&filter_mt=${this.search.milktea}&filter_fr=${this.search.frappe}&filter_sn=${this.search.snack}`)
         .then((res) => {
-            console.log(res);
             this.setState({
                 isLoading: false,
                 products: res.data
             })
+            this.props.setResults(res.data.length);
         })
         .catch((err) => {
             console.log(err);

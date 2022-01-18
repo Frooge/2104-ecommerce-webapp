@@ -14,15 +14,10 @@ export default class ItemDisplay extends Component {
                         <ItemImage image={this.props.product.ProductImage}/>
                     </div>
                     <div className="col-5">
-                        <ItemDetails
-                        productName={this.props.product.ProductName}
-                        storeName={this.props.product.StoreName}
-                        price={this.props.product.Price}
-                        description={this.props.product.Description}
-                        />
+                        <ItemDetails product={this.props.product}/>
                     </div>
                     <div className="col-3">
-                        <ItemOrder />
+                        <ItemOrder product={this.props.product}/>
                     </div>
                 </div>
                 

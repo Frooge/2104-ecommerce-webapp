@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2022 at 12:09 PM
+-- Generation Time: Jan 18, 2022 at 05:21 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -30,9 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `carts` (
   `CartID` int(16) NOT NULL,
   `UserID` int(16) NOT NULL,
-  `OrderID` int(16) NOT NULL,
-  `TotalPrice` int(16) NOT NULL
+  `TotalPrice` int(16) NOT NULL,
+  `isDiscarded` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`CartID`, `UserID`, `TotalPrice`, `isDiscarded`) VALUES
+(2, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -60,16 +67,21 @@ CREATE TABLE `extras` (
   `ExtrasID` int(16) NOT NULL,
   `ProductTypeID` int(16) NOT NULL,
   `AddOns` varchar(50) NOT NULL,
-  `AddFee` int(16) NOT NULL,
-  `Image` varchar(50) NOT NULL
+  `AddFee` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `extras`
 --
 
-INSERT INTO `extras` (`ExtrasID`, `ProductTypeID`, `AddOns`, `AddFee`, `Image`) VALUES
-(1, 1, 'Boba', 10, 'NA');
+INSERT INTO `extras` (`ExtrasID`, `ProductTypeID`, `AddOns`, `AddFee`) VALUES
+(1, 1, 'None', 0),
+(2, 1, 'Pearls', 20),
+(3, 1, 'Oreo', 20),
+(4, 2, 'None', 0),
+(5, 2, 'Pearls', 20),
+(6, 2, 'Oreo', 20),
+(7, 3, 'None', 0);
 
 -- --------------------------------------------------------
 
@@ -82,8 +94,20 @@ CREATE TABLE `items` (
   `ProductID` int(16) NOT NULL,
   `ExtrasID` int(16) NOT NULL,
   `CartID` int(16) NOT NULL,
+  `Size` varchar(16) NOT NULL,
+  `Quantity` int(16) NOT NULL,
   `PartialPrice` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`ItemID`, `ProductID`, `ExtrasID`, `CartID`, `Size`, `Quantity`, `PartialPrice`) VALUES
+(1, 1, 1, 2, 'Regular', 1, 89),
+(2, 1, 2, 2, 'Large', 4, 476),
+(3, 2, 5, 2, 'Regular', 2, 218),
+(4, 2, 6, 2, 'Large', 3, 387);
 
 -- --------------------------------------------------------
 
@@ -94,16 +118,10 @@ CREATE TABLE `items` (
 CREATE TABLE `orders` (
   `OrderID` int(16) NOT NULL,
   `UserID` int(16) NOT NULL,
+  `CartID` int(16) NOT NULL,
   `OrderDate` date NOT NULL,
   `PaymentMethod` enum('Delivery','WalkIn') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`OrderID`, `UserID`, `OrderDate`, `PaymentMethod`) VALUES
-(1, 1, '0000-00-00', 'Delivery');
 
 -- --------------------------------------------------------
 
@@ -240,8 +258,7 @@ INSERT INTO `user_type` (`UserTypeID`, `TypeName`) VALUES
 --
 ALTER TABLE `carts`
   ADD PRIMARY KEY (`CartID`),
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `OrderID` (`OrderID`);
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- Indexes for table `delivery`
@@ -272,7 +289,8 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `CartID` (`CartID`);
 
 --
 -- Indexes for table `products`
@@ -316,7 +334,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `CartID` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `CartID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `delivery`
@@ -328,13 +346,13 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `extras`
 --
 ALTER TABLE `extras`
-  MODIFY `ExtrasID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ExtrasID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `ItemID` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `ItemID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -380,8 +398,7 @@ ALTER TABLE `user_type`
 -- Constraints for table `carts`
 --
 ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
-  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`);
+  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
 
 --
 -- Constraints for table `delivery`
@@ -408,7 +425,8 @@ ALTER TABLE `items`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`CartID`) REFERENCES `carts` (`CartID`);
 
 --
 -- Constraints for table `products`

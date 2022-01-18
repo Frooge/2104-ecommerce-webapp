@@ -3,8 +3,8 @@
 
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if($method == 'GET'){
-        if(isset($_GET["search"])){
+    if($method == 'GET') {
+        if(isset($_GET["search"])) {
             $name = $_GET["search"];
             $term = '%'.str_replace(' ','%',$name).'%';
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
@@ -13,8 +13,7 @@
                     LEFT JOIN stores
                     ON products.StoreID = stores.StoreID
                     WHERE products.ProductName LIKE '$term'";
-        }
-        else if(isset($_GET["id"])){
+        } else if(isset($_GET["id"])) {
             $id = $_GET["id"];
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type
@@ -22,8 +21,7 @@
                     LEFT JOIN stores
                     ON products.StoreID = stores.StoreID
                     WHERE products.ProductID = $id";
-        }
-        else if(isset($_GET["type"])){
+        } else if(isset($_GET["type"])) {
             $typeID = $_GET["type"];
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type
@@ -32,8 +30,7 @@
                     ON products.StoreID = stores.StoreID
                     WHERE products.ProductTypeID = $typeID
                     LIMIT 4";
-        }
-        else {
+        } else {
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type
                     ON products.ProductTypeID = product_type.ProductTypeID
@@ -53,8 +50,7 @@
             echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
         }
         echo ']';
-    }
-    else if($method == 'POST'){
+    } else if($method == 'POST') {
         $result = false;
         $message = '';
         $valid = true;
@@ -75,17 +71,15 @@
             if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                 $message = "An error occured when uploading your file.";
                 $valid = false;
-            }
-            else {
+            } else {
                 $message = "Successful file upload";
             }
         }
 
-        if($image == ''){
-            if(!isset($_POST["id"])){
+        if($image == '') {
+            if(!isset($_POST["id"])) {
                 $image = 'placeholder.png';
-            }
-            else{
+            } else {
                 $id = $_POST["id"];
                 $stmt = $con->prepare("SELECT * FROM products WHERE ProductID = ?");
                 $stmt->bind_param("i", $id);
@@ -96,15 +90,14 @@
                 if($result && $result->num_rows > 0){ 
                     $obj = mysqli_fetch_object($result);
                     $image = $obj->ProductImage;
-                }
-                else {
+                } else {
                     http_response_code(404);
                     die(mysqli_error($con));
                 }
             }
         }
 
-        if($valid){
+        if($valid) {
             $sql = '';
             $typeID = $_POST["typeID"];
             $storeID = $_POST["storeID"];
@@ -114,10 +107,9 @@
             $size = $_POST["size"];
             $description = $_POST["description"];
 
-            if(!isset($_POST["id"])){
+            if(!isset($_POST["id"])) {
                 $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, RegularPrice, LargePrice, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', $regular, $large, '$description', '$image', 1)";
-            }
-            else{
+            } else {
                 $id = $_POST["id"];
                 $available = $_POST["available"];
                 $sql = "UPDATE products SET ProductTypeID=$typeID, StoreID=$storeID, ProductName='$name', RegularPrice=$regular, LargePrice=$large, Description='$description', ProductImage='$image', isAvailable=$available WHERE ProductID = $id";
@@ -138,8 +130,7 @@
             'message' => $message,
         );
         echo json_encode($ret);
-    }
-    else {
-        die("Wrong request method");
+    } else {
+        die("Unavailable request method");
     }
 ?>

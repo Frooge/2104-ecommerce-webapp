@@ -42,7 +42,7 @@ class ProductsSearch extends Component {
                             </Form>
                         </div>
                         <div className="col-sm-6">
-                            <label>0 results</label>
+                            <label>{this.props.results} results</label>
                         </div>
                         <div className="col-sm-1">
                             <DropdownButton id="dropdown-basic-button" title="Sort By">
