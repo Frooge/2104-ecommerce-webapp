@@ -19,8 +19,7 @@ class ProductsDisplay extends Component {
     }
 
     getProducts = () => {
-        console.log(this.search);
-        axios.get(`${require('../../config/api')}filter_search.php?search=${this.search.query}&filter_mt=${this.search.milktea}&filter_fr=${this.search.frappe}&filter_sn=${this.search.snack}`)
+        axios.get(`${require('../../config/api')}product_search.php?search=${this.search.query}&filter_mt=${this.search.milktea}&filter_fr=${this.search.frappe}&filter_sn=${this.search.snack}`)
         .then((res) => {
             console.log(res);
             this.setState({

@@ -20,8 +20,11 @@ export default class ProductsMain extends Component {
     componentDidMount() {
         if(this.getQueryVariable('search') !== false){
             this.setState({
-                search: this.getQueryVariable('search')
-            })
+                search: {
+                    ...this.state.search,
+                    query: this.getQueryVariable('search')
+                }
+            });
         }
     }
 
