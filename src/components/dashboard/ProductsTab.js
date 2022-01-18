@@ -92,16 +92,13 @@ export default class ProductsTab extends Component {
                             <label><strong>Name</strong></label>
                         </div>
                         <div className="col-1">
-                            <label><strong>Size</strong></label>
+                            <label><strong>Regular</strong></label>
                         </div>
                         <div className="col-1">
-                            <label><strong>Price</strong></label>
+                            <label><strong>Large</strong></label>
                         </div>
                         <div className="col-1">
                             <label><strong>Available</strong></label>
-                        </div>
-                        <div className="col">
-                            <label><strong>Description</strong></label>
                         </div>
                         <div className="col-1" />
                     </div>
@@ -126,16 +123,13 @@ export default class ProductsTab extends Component {
                                         <label>{p.ProductName}</label>
                                     </div>
                                     <div className="col-1 align-self-center">
-                                        <label>{p.Size}</label>
+                                        <label>{'₱' + p.RegularPrice}</label>
                                     </div>
                                     <div className="col-1 align-self-center">
-                                        <label>{'₱' + p.Price}</label>
+                                        <label>{'₱' + p.LargePrice}</label>
                                     </div>
                                     <div className="col-1 align-self-center">
                                         <label>{(p.isAvailable === "1")? "YES" : "NO"}</label>
-                                    </div>
-                                    <div className="col align-self-center">
-                                        <label>{p.Description}</label>
                                     </div>
                                     <div className="col-1 dash-btn align-self-center">
                                         <ProductsTabModal content="EDIT" product={p} updateDisplay={this.updateDisplay}/>

@@ -3,11 +3,13 @@ import { Modal } from 'react-bootstrap'
 import axios from 'axios'
 
 export default function ProductsTabModal({content, product, updateDisplay}) {
-    const [show, setShow] = useState(false);
     const isProduct = typeof product !== 'undefined';
+
+    const [show, setShow] = useState(false);
+    const [type, setType] = useState((isProduct)? product.TypeName : 'Milktea');
+
     const image = (isProduct)?
     require(`../../img/${product.ProductImage}`).default : require(`../../img/placeholder.png`).default;
-    const type = (isProduct)? product.TypeName : 'Milktea';
     const size = (isProduct)? product.Size : 'Regular';
     const availableSelect = (isProduct)?
     (
@@ -69,9 +71,7 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
         else {
             console.log("Error ✔✔✔")
         }
-
     }
-
 
     return (
         <div>
@@ -106,19 +106,19 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
                             <div className="col-3">
                                 <label><strong>Product Type</strong></label>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" id="milktea-option" name="typeID" value="1" defaultChecked={type==='Milktea'}/>
+                                    <input className="form-check-input" type="radio" id="milktea-option" name="typeID" value="1" onClick={() => setType('Milktea')} defaultChecked={type==='Milktea'}/>
                                     <label className="form-check-label" htmlFor="milktea-option">
                                         Milktea
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" id="frappe-option" name="typeID" value="2"  defaultChecked={type==='Frappe'}/>
+                                    <input className="form-check-input" type="radio" id="frappe-option" name="typeID" value="2" onClick={() => setType('Frappe')} defaultChecked={type==='Frappe'}/>
                                     <label className="form-check-label" htmlFor="frappe-option">
                                         Frappe
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" id="snack-option" name="typeID" value="3"  defaultChecked={type==='Snack'}/>
+                                    <input className="form-check-input" type="radio" id="snack-option" name="typeID" value="3" onClick={() => setType('Snack')} defaultChecked={type==='Snack'}/>
                                     <label className="form-check-label" htmlFor="snack-option">
                                         Snack
                                     </label>
@@ -129,22 +129,16 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
                                         <option>1</option>
                                     </select>
                                 </div>
-                                <div className="form-group">
-                                    <label><strong>Price (in php)</strong></label>
-                                    <input type="text" className="form-control" name="price" defaultValue={(isProduct)?product.Price:''} required/>
-                                </div>
-                                <label><strong>Size</strong></label>
-                                <div className="form-check col">
-                                    <input className="form-check-input" type="radio" id="regular-option" name="size" value="Regular"  defaultChecked={size==='Regular'}/>
-                                    <label className="form-check-label" htmlFor="regular-option">
-                                        Regular
-                                    </label>
-                                </div>
-                                <div className="form-check col">
-                                    <input className="form-check-input" type="radio" id="large-option" name="size" value="Large"  defaultChecked={size==='Large'}/>
-                                    <label className="form-check-label" htmlFor="large-option">
-                                        Large
-                                    </label>
+                                <label><strong>Price (in php)</strong></label>
+                                <div className="row">
+                                    <div className="form-group col">
+                                        <label style={{display:(type!=='Snack')?'block':'none'}}><strong>Regular</strong></label>
+                                        <input type="text" className="form-control" name="regular" defaultValue={(isProduct)?product.RegularPrice:'0'} required/>
+                                    </div>
+                                    <div className="form-group col" style={{display:(type!=='Snack')?'block':'none'}}>
+                                        <label><strong>Large</strong></label>
+                                        <input type="text" className="form-control" name="large" defaultValue={(isProduct && type!== 'Snack')?product.LargePrice:'0'} required/>
+                                    </div>
                                 </div>
                                 {availableSelect}
                             </div>

@@ -12,8 +12,7 @@
                     ON products.ProductTypeID = product_type.ProductTypeID
                     LEFT JOIN stores
                     ON products.StoreID = stores.StoreID
-                    WHERE products.ProductName LIKE '$term'
-                    ORDER BY product_type.ProductTypeID ASC";
+                    WHERE products.ProductName LIKE '$term'";
         }
         else if(isset($_GET["id"])){
             $id = $_GET["id"];
@@ -39,8 +38,7 @@
                     LEFT JOIN product_type
                     ON products.ProductTypeID = product_type.ProductTypeID
                     LEFT JOIN stores
-                    ON products.StoreID = stores.StoreID
-                    ORDER BY product_type.ProductTypeID ASC"; 
+                    ON products.StoreID = stores.StoreID"; 
         }
         
         $result = mysqli_query($con,$sql);
@@ -111,17 +109,18 @@
             $typeID = $_POST["typeID"];
             $storeID = $_POST["storeID"];
             $name = $_POST["name"];
-            $price = $_POST["price"];
+            $regular = $_POST["regular"];
+            $large = $_POST["large"];
             $size = $_POST["size"];
             $description = $_POST["description"];
 
             if(!isset($_POST["id"])){
-                $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, Size, Price, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', '$size', $price, '$description', '$image', 1)";
+                $sql = "INSERT INTO products (ProductTypeID, StoreID, ProductName, RegularPrice, LargePrice, Description, ProductImage, isAvailable) VALUES ($typeID, $storeID, '$name', $regular, $large, '$description', '$image', 1)";
             }
             else{
                 $id = $_POST["id"];
                 $available = $_POST["available"];
-                $sql = "UPDATE products SET ProductTypeID=$typeID, StoreID=$storeID, ProductName='$name', Size='$size', Price=$price, Description='$description', ProductImage='$image', isAvailable=$available WHERE ProductID = $id";
+                $sql = "UPDATE products SET ProductTypeID=$typeID, StoreID=$storeID, ProductName='$name', RegularPrice=$regular, LargePrice=$large, Description='$description', ProductImage='$image', isAvailable=$available WHERE ProductID = $id";
             }
 
             // run SQL statement

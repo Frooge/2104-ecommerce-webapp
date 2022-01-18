@@ -19,7 +19,7 @@ class ProductCard extends Component {
                         </div>
                         <h2>{this.product.ProductName}</h2>
                         <p>{this.product.TypeName}</p>
-                        <h3>{'₱' + this.product.Price}</h3>
+                        <h3>{'₱' + this.product.RegularPrice}</h3>
                     </a>
                 </div>
             </div>

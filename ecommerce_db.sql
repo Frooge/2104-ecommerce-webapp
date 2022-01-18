@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2022 at 02:14 PM
+-- Generation Time: Jan 18, 2022 at 12:09 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -116,9 +116,9 @@ CREATE TABLE `products` (
   `ProductTypeID` int(16) NOT NULL,
   `StoreID` int(16) NOT NULL,
   `ProductName` varchar(50) NOT NULL,
-  `Size` varchar(18) NOT NULL,
-  `Price` int(16) NOT NULL,
-  `Description` varchar(255) NOT NULL,
+  `RegularPrice` int(16) NOT NULL,
+  `LargePrice` int(16) NOT NULL,
+  `Description` varchar(512) NOT NULL,
   `ProductImage` varchar(50) NOT NULL,
   `isAvailable` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -127,18 +127,20 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`ProductID`, `ProductTypeID`, `StoreID`, `ProductName`, `Size`, `Price`, `Description`, `ProductImage`, `isAvailable`) VALUES
-(1, 1, 1, 'Frogbitt', 'Regular', 1, 'ahhhg', '1641389672332.png', 1),
-(2, 1, 1, 'Frogbitt', 'Large', 2, '', 'placeholder.png', 0),
-(3, 2, 1, 'pls work', 'Regular', 1, '', 'placeholder.png', 1),
-(4, 2, 1, 'pls work', 'Large', 2, '', 'placeholder.png', 1),
-(5, 1, 1, 'frooger', 'Regular', 1, '', 'placeholder.png', 1),
-(6, 1, 1, 'frooger', 'Large', 4, '', 'placeholder.png', 1),
-(7, 3, 1, 'rule_', 'Regular', 32, '', 'placeholder.png', 1),
-(8, 3, 1, 'rule_', 'Large', 25, '', 'placeholder.png', 1),
-(9, 3, 1, 'try', 'Regular', 44, '', 'placeholder.png', 1),
-(10, 3, 1, 'try', 'Large', 55, '', 'placeholder.png', 1),
-(11, 3, 1, 'best snack', 'Large', 1000, 'delicios snack', '2104 ERD.png', 1);
+INSERT INTO `products` (`ProductID`, `ProductTypeID`, `StoreID`, `ProductName`, `RegularPrice`, `LargePrice`, `Description`, `ProductImage`, `isAvailable`) VALUES
+(1, 1, 1, 'Hokkaido', 89, 99, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'mt.jpg', 1),
+(2, 1, 1, 'Okinawa', 89, 99, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'mt.jpg', 1),
+(3, 1, 1, 'Taro', 89, 99, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'mt.jpg', 1),
+(4, 1, 1, 'Wintermelon', 89, 99, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'mt.jpg', 1),
+(5, 1, 1, 'Dark chocolate', 89, 99, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'mt.jpg', 1),
+(6, 2, 1, 'Dark chocolate', 89, 109, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'fp.jpg', 1),
+(7, 2, 1, 'Ube', 89, 109, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'fp.jpg', 1),
+(8, 2, 1, 'Mango', 89, 109, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'fp.jpg', 1),
+(9, 2, 1, 'Red Velvet', 89, 109, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'fp.jpg', 1),
+(10, 3, 1, 'Burger (Plain)', 35, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
+(11, 3, 1, 'Burger with cheese', 55, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
+(12, 3, 1, 'Regular Hotdog', 39, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
+(13, 3, 1, 'French Fries', 45, 15, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -344,7 +346,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ProductID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `product_type`
