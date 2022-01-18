@@ -12,14 +12,25 @@
                     ON products.ProductTypeID = product_type.ProductTypeID
                     LEFT JOIN stores
                     ON products.StoreID = stores.StoreID
-                    WHERE products.ProductName LIKE '$term'";
+                    WHERE products.ProductName LIKE '$term'
+                    ORDER BY product_type.ProductTypeID ASC";
+        }
+        else if(isset($_GET["id"])){
+            $id = $_GET["id"];
+            $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
+                    LEFT JOIN product_type
+                    ON products.ProductTypeID = product_type.ProductTypeID
+                    LEFT JOIN stores
+                    ON products.StoreID = stores.StoreID
+                    WHERE products.ProductID = $id";
         }
         else {
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type
                     ON products.ProductTypeID = product_type.ProductTypeID
                     LEFT JOIN stores
-                    ON products.StoreID = stores.StoreID"; 
+                    ON products.StoreID = stores.StoreID
+                    ORDER BY product_type.ProductTypeID ASC"; 
         }
         
         $result = mysqli_query($con,$sql);

@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Form, FormControl, Button, OverlayTrigger, Popo
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import $ from 'jquery'
 import NavbarAdmin from './NavbarAdmin'
 import NavbarUser from './NavbarUser'
 import logo from '../img/mf_logo.png'
@@ -64,6 +65,18 @@ class NavbarMain extends Component {
         })
     }
 
+    handleSearch = (e) => {
+        e.preventDefault();
+
+        let value = $('#nav-search-form').serializeArray(),
+        obj = {};
+        $(value).each(function(i , field){
+            obj[field.name] = field.value;
+        });
+
+        window.location.replace(`/products?search=${obj["search"]}`)
+    }
+
     render() {
         return (
             <div className="navbar-main">
@@ -75,14 +88,15 @@ class NavbarMain extends Component {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Form className="d-flex navbar-content">
+                                <Form className="d-flex navbar-content" id="nav-search-form" onSubmit={this.handleSearch}>
                                     <FormControl
                                         type="search"
-                                        placeholder="Search"
+                                        name="search"
                                         className="me-2"
+                                        placeholder="Search"
                                         aria-label="Search"
                                     />
-                                    <Button variant="outline-success">Search</Button>
+                                    <Button type="submit" variant="outline-success">Search</Button>
                                 </Form>
                                 <Link to="/"
                                 className={[

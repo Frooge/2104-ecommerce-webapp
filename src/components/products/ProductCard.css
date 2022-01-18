@@ -6,6 +6,12 @@
     min-height: 300px;
 }
 
+.product-card-image {
+    min-height: 154px;
+    max-height: 154px;
+    overflow: hidden;
+}
+
 .product-item > * {
     color: white;
 }
@@ -21,4 +27,5 @@
 
 .product-image {
     width: 100%;
+    vertical-align: center;
 }

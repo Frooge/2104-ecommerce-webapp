@@ -5,7 +5,8 @@ import './Breadcrumbs.css'
 class Breadcrumbs extends Component {
     constructor(props){
         super(props);
-        this.inItem = props.inItem;
+        this.inItem = this.props.inItem;
+        this.itemName = this.props.itemName;
     }
 
     render() {
@@ -14,7 +15,7 @@ class Breadcrumbs extends Component {
                 <Breadcrumb className="links">
                     <BreadcrumbItem href="/">Home</BreadcrumbItem>
                     {this.inItem ? (<BreadcrumbItem href="/products">Products</BreadcrumbItem>):(<BreadcrumbItem active>Products</BreadcrumbItem>)}
-                    {this.inItem ? (<BreadcrumbItem active>Item</BreadcrumbItem>):null}
+                    {this.inItem ? (<BreadcrumbItem active>{this.itemName}</BreadcrumbItem>):null}
                 </Breadcrumb>
             </div>
         )
