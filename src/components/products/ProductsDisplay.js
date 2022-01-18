@@ -21,7 +21,6 @@ class ProductsDisplay extends Component {
     getProducts = () => {
         axios.get(`${require('../../config/api')}product.php?search=${this.search}`)
         .then((res) => {
-            console.log(res, "product result", this.search);
             this.setState({
                 isLoading: false,
                 products: res.data
@@ -46,7 +45,7 @@ class ProductsDisplay extends Component {
                     ) : (this.state.products.length !== 0) ? (
                         <div className="row">
                             {this.state.products.map((p) => (
-                                <ProductCard product={p}/>
+                                <ProductCard key={p.ProductID} product={p}/>
                             ))}
                         </div>
                     ) : (

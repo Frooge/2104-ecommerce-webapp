@@ -13,14 +13,14 @@ class ProductCard extends Component {
         return (
             <div className="product-card col-sm-3">
                 <div className="product-item">
-                    <Link className="product-link" to={'/products/item?p_id=' + this.product.ProductID}>
+                    <a className="product-link" href={'/products/item?p_id=' + this.product.ProductID}>
                         <div className="product-card-image">
                             <img className="product-image" src={this.image} alt="product" />
                         </div>
                         <h2>{this.product.ProductName}</h2>
                         <p>{this.product.TypeName}</p>
                         <h3>{'₱' + this.product.Price}</h3>
-                    </Link>
+                    </a>
                 </div>
             </div>
         )

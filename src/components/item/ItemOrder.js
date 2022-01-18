@@ -7,7 +7,7 @@ export default class ItemOrder extends Component {
             <div className="item-order">
                 <form>
                     <div className="select-item">
-                        <input class="form-control w-50" type="text" placeholder="Quantity" />
+                        <input className="form-control w-50" type="text" placeholder="Quantity" />
                     </div>
                     <div className="select-item">
                         <button className="btn btn-secondary btn-sm w-100">Add to cart</button>

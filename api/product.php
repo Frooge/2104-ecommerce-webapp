@@ -24,6 +24,16 @@
                     ON products.StoreID = stores.StoreID
                     WHERE products.ProductID = $id";
         }
+        else if(isset($_GET["type"])){
+            $typeID = $_GET["type"];
+            $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
+                    LEFT JOIN product_type
+                    ON products.ProductTypeID = product_type.ProductTypeID
+                    LEFT JOIN stores
+                    ON products.StoreID = stores.StoreID
+                    WHERE products.ProductTypeID = $typeID
+                    LIMIT 4";
+        }
         else {
             $sql = "SELECT products.*, product_type.TypeName, stores.StoreName FROM products
                     LEFT JOIN product_type

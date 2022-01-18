@@ -8,21 +8,21 @@ class ProductsFilter extends Component {
                 <div className="container filter-list">
                     <p className="filter-heading">Filters</p>
                     <form>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label check-color">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="1" name="milktea" defaultChecked="true"/>
+                            <label className="form-check-label check-color">
                                 Milktea
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label check-color">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="2" name="frappe" defaultChecked="true"/>
+                            <label className="form-check-label check-color">
                                 Frappe
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" defaultChecked="true"/>
-                            <label class="form-check-label check-color">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="3" name="snack" defaultChecked="true"/>
+                            <label className="form-check-label check-color">
                                 Snacks
                             </label>
                         </div>

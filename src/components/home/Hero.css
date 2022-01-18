@@ -1,6 +1,7 @@
 .hero {
     margin-bottom: calc(10em - 97.250px);
     text-align: center;
+    min-height: 544px;
 }
 
 .hero-image {

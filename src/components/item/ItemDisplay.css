@@ -1,3 +1,4 @@
 .item-display {
     margin-bottom: calc(10em - 97.250px);
+    min-height:362px;
 }

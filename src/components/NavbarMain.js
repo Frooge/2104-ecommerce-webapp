@@ -35,7 +35,6 @@ class NavbarMain extends Component {
     getSession() {
         return axios.get(`${require('../config/api')}session.php`, {credentials: "same-origin"})
         .then((res) => {
-            console.log(res);
             this.setState({
                 id: res.data.session.id
             })
@@ -45,7 +44,6 @@ class NavbarMain extends Component {
     getUser() {
         axios.get(`${require('../config/api')}account.php?userID=${this.state.id}`)
         .then((res) => {
-            console.log(res);
             this.setState({
                 name: res.data.Fullname,
                 userType: this.type[res.data.UserTypeID]
@@ -147,5 +145,5 @@ class NavbarMain extends Component {
 export default function(props) {
     const navigate = useNavigate();
 
-    return <NavbarMain navigate={navigate} />
+    return <NavbarMain navigate={navigate} navSelected={props.navSelected} />
 }
