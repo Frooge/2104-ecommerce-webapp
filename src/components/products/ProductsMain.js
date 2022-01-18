@@ -8,7 +8,12 @@ export default class ProductsMain extends Component {
     constructor(props){
         super(props);
         this.state = {
-            search: '',
+            search: {
+                query: '',
+                milktea: true,
+                frappe: true,
+                snack: true
+            }
         }
     }
 
@@ -30,22 +35,36 @@ export default class ProductsMain extends Component {
          return(false);
     }
 
-    setFilterSearch = (setSearch = this.state.search) => {
+    setSearch = (setQuery) => {
         this.setState({
-            search: setSearch
+            search: {
+                ...this.state.search,
+                query: setQuery,
+            }
+        })
+    } 
+
+    setFilter = (setMilktea, setFrappe, setSnack) => {
+        this.setState({
+            search: {
+                ...this.state.search,
+                milktea: setMilktea,
+                frappe: setFrappe,
+                snack: setSnack
+            }
         })
     } 
 
     render() {
         return (
             <div className="products-main container">
-            <ProductsSearch setSearch={this.setFilterSearch}/>
+            <ProductsSearch setSearch={this.setSearch}/>
             <div className="row">
                 <div className="col-sm-2">
-                    <ProductsFilter />
+                    <ProductsFilter setFilter={this.setFilter}/>
                 </div>
                 <div className="col-sm-10">
-                    <ProductsDisplay key={this.state.search} search={this.state.search} />
+                    <ProductsDisplay key={this.state.search.query + this.state.search.milktea  + this.state.search.frappe  + this.state.search.snack} search={this.state.search} />
                 </div>
             </div>
         </div>
