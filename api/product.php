@@ -115,10 +115,8 @@
                 $sql = "UPDATE products SET ProductTypeID=$typeID, StoreID=$storeID, ProductName='$name', RegularPrice=$regular, LargePrice=$large, Description='$description', ProductImage='$image', isAvailable=$available WHERE ProductID = $id";
             }
 
-            // run SQL statement
             $result = mysqli_query($con, $sql);
 
-            // die if SQL statement failed
             if (!$result) {
                 http_response_code(404);
                 die(mysqli_error($con));

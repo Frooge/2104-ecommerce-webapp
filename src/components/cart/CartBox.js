@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CartItem from './CartItem'
+import { Spinner } from 'react-bootstrap'
 import './CartBox.css'
 
 export default class CartBox extends Component {
@@ -13,12 +14,15 @@ export default class CartBox extends Component {
                     <label className="col">PRICE</label>
                 </div>
                 <hr />
-                <CartItem />
-                <CartItem />
-                <CartItem />
-                <CartItem />
-                <CartItem />
-                <CartItem />
+                {(this.props.isLoading) ? (
+                    <div style={{textAlign:'center'}}>
+                        <Spinner animation="border" role="status"  >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                ) : this.props.items.map((i) => (
+                    <CartItem key={i.ItemID} item={i}/>
+                ))}
             </div>
         )
     }

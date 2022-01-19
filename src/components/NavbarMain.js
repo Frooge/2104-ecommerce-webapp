@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 import NavbarAdmin from './NavbarAdmin'
 import NavbarUser from './NavbarUser'
 import logo from '../img/mf_logo.png'
@@ -58,7 +59,12 @@ class NavbarMain extends Component {
         e.preventDefault();
         axios.get(`${require('../config/api')}logout.php`, {credentials: "same-origin"})
         .then(() => {
-            alert("Logout successfully");
+            return Swal.fire({
+                icon: 'success',
+                title: 'Logged Out Successfully',
+            });
+        })
+        .then(() => {
             this.navigate('/setup');
         })
     }

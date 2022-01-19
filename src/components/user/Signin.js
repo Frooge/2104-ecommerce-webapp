@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 import './Signin.css'
 
 class Signin extends Component {
@@ -25,11 +26,19 @@ class Signin extends Component {
         .then((res) => {
             console.log(res);
             if(!res.data){
-                alert("Incorrect email or password");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Incorrect Email or Password'
+                })
             }
             else {
-                alert("Successful");
-                this.navigate('/');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Logged In'
+                })
+                .then(() => {
+                    this.navigate('/');
+                })
             }
         })
         .catch((err) => {

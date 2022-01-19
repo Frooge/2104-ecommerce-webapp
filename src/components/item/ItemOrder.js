@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 import './ItemOrder.css'
 
 export default class ItemOrder extends Component {
@@ -48,21 +49,34 @@ export default class ItemOrder extends Component {
         let partialPrice = (parseInt(sizePrice) + parseInt(extrasSelected.AddFee)) * (obj['quantity']);
 
         let data = new FormData(document.getElementById("add-to-cart-form"));
-        data.append('product', this.props.product.ProductTypeID)
+        data.append('product', this.props.product.ProductID)
         data.append('price', partialPrice)
 
         axios.get(`${require('../../config/api')}session.php`, {credentials: "same-origin"})
         .then((res) => {
-            data.append('user', res.data.session.id);
-            for (var pair of data.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]); 
+            if(res.data.session.length !== 0){
+                data.append('user', res.data.session.id);
+                data.append('mode', 'CREATE');
+                return axios.post(`${require('../../config/api')}cart.php`, data);
+            } else {
+                return {'data': false};
             }
-            return axios.post(`${require('../../config/api')}cart.php`, data);
         })
         .then((res) => {
             if(res.data){
-                alert("Successfully added item to cart");
-                window.location.reload();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully added item to cart'
+                })
+                .then(() => {
+                    window.location.reload();
+                })
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'You need to be logged in to purchase items',
+                    footer: '<a href="/setup">Sign in here</a>'
+                })
             }
         })
         .catch((err) => {

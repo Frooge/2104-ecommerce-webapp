@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 import './Signup.css'
 
 export default class Signup extends Component {
@@ -15,7 +16,10 @@ export default class Signup extends Component {
         });
 
         if(obj['password'] !== obj['confirm-password']){
-            alert("Incorrect confirm password");
+            Swal.fire({
+                icon: 'error',
+                title: 'Incorrect confirm password'
+            })
         }
         else {
             let data = new FormData();
@@ -31,11 +35,19 @@ export default class Signup extends Component {
             .then((res) => {
                 console.log(res);
                 if(!res.data){
-                    alert("Email has already been taken");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email already been taken'
+                    })
                 }
                 else {
-                    alert("Account created successfully!");
-                    this.props.change("signin");
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Account created successfully!'
+                    })
+                    .then(() => {
+                        this.props.change("signin");
+                    })
                 }
             })
             .catch((err) => {
