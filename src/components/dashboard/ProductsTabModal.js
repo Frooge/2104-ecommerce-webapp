@@ -98,10 +98,10 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
                 onHide={() => setShow(false)}
                 dialogClassName="modal-view-w"
             >
-                <Modal.Header closeButton className="products-modal-color">
+                <Modal.Header closeButton>
                     <Modal.Title>{content} Product</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="products-modal-color">
+                <Modal.Body>
                     <form id={content + '-form'}  onSubmit={handleFormSubmit} encType="multipart/form-data" method="post">
                         <div className="row mb-4">
                             <div className="col-4 form-group">

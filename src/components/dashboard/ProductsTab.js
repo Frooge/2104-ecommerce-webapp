@@ -43,7 +43,7 @@ export default class ProductsTab extends Component {
     handleSearch = (e) => {
         e.preventDefault();
 
-        let value = $('#search-form').serializeArray(),
+        let value = $('#product-search-form').serializeArray(),
         obj = {};
         $(value).each(function(i , field){
             obj[field.name] = field.value;
@@ -62,7 +62,7 @@ export default class ProductsTab extends Component {
                     <span className="col-6">
                         <h3>Products</h3>
                     </span>
-                    <Form className="d-flex col-4" id="search-form" onSubmit={this.handleSearch}>
+                    <Form className="d-flex col-4" id="product-search-form" onSubmit={this.handleSearch}>
                         <FormControl
                             type="search"
                             name="search"
@@ -131,7 +131,7 @@ export default class ProductsTab extends Component {
                                     <div className="col-1 align-self-center">
                                         <label>{(p.isAvailable === "1")? "YES" : "NO"}</label>
                                     </div>
-                                    <div className="col-1 dash-btn align-self-center">
+                                    <div className="col-1 align-self-center" style={{textAlign:'center'}}>
                                         <ProductsTabModal content="EDIT" product={p} updateDisplay={this.updateDisplay}/>
                                     </div>
                                 </div>
