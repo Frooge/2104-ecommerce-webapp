@@ -8,10 +8,10 @@ export default class CartBox extends Component {
         return (
             <div className="cart-box">
                 <div className="row">
-                    <label className="col-sm-5">PRODUCT</label>
-                    <label className="col-sm-2">EXTRAS</label>
-                    <label className="col-sm-2">QUANTITY</label>
-                    <label className="col">PRICE</label>
+                    <label className="col-sm-5"><strong>PRODUCT</strong></label>
+                    <label className="col-sm-2"><strong>EXTRAS</strong></label>
+                    <label className="col-sm-2"><strong>QUANTITY</strong></label>
+                    <label className="col"><strong>PRICE</strong></label>
                 </div>
                 <hr />
                 {(this.props.isLoading) ? (
@@ -20,9 +20,13 @@ export default class CartBox extends Component {
                             <span className="visually-hidden">Loading...</span>
                         </Spinner>
                     </div>
-                ) : this.props.items.map((i) => (
+                ) : (this.props.items.length > 0) ? this.props.items.map((i) => (
                     <CartItem key={i.ItemID} item={i}/>
-                ))}
+                )) : (
+                    <div>
+                        <h2>No items in cart</h2>
+                    </div>
+                )}
             </div>
         )
     }

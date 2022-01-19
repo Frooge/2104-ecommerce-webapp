@@ -1,9 +1,14 @@
 .cart-item {
-    padding: 1em 0;
+    padding: 0.25em 0;
 }
 
 .cart-item-image {
     width: 100%;
     max-height: 115px;
     min-height: 115px;
+}
+
+.cart-item-remove {
+    text-align: center;
+    padding-right: 1.5em;
 }

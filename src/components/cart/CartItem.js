@@ -29,26 +29,27 @@ export default class CartItem extends Component {
     render() {
         return (
             <div className="cart-item row">
-                <div className="col-sm-2">
+                <div className="col-2">
                     <img className="cart-item-image" src={this.image} alt="item"/>
                 </div>
-                <div className="col-sm-3">
-                    {this.item.ProductName}
-                    <br />
-                    {this.item.NameType}
+                <div className="col-3">
+                    <h5>{this.item.ProductName}</h5>
+                    <label>Type: {this.item.TypeName}</label>
+                    <p>From: {this.item.StoreName}</p>
                 </div>
-                <div className="col-sm-2">
-                    {this.item.AddOns}
+                <div className="col-2">
+                    <p>{this.item.AddOns}</p>
                 </div>
-                <div className="col-sm-2">
-                    {this.item.Quantity}
+                <div className="col-2">
+                    <p>{this.item.Quantity}</p>
                 </div>
-                <div className="col-sm-1">
-                    {'₱' + this.item.PartialPrice}
+                <div className="col-1">
+                    <p>{'₱' + this.item.PartialPrice}</p>
                 </div>
-                <div className="col-sm-1">
+                <div className="col-2 cart-item-remove">
                     <button className="btn btn-danger" onClick={this.handleButtonClick}>Remove</button>
                 </div>
+                <hr className="mt-4"/>
             </div>
         )
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CartBox from './CartBox'
 import CartCheckout from './CartCheckout'
-import DeliveryInfo from './DeliveryInfo'
 import axios from 'axios'
 import './CartDisplay.css'
 
@@ -10,9 +9,9 @@ export default class CartDisplay extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showModal: false,
             isLoading: true,
-            items: {},
+            items: [],
+            total: 0
         }
     }
 
@@ -22,16 +21,18 @@ export default class CartDisplay extends Component {
             this.setState({
                 isLoading: false,
                 items: res.data
+            }, () => {
+                let price = 0;
+                this.state.items.map((i) => {
+                    price += parseInt(i.PartialPrice);
+                })
+                this.setState({
+                    total: price
+                })
             })
         })
         .catch((err) => {
             console.log(err);
-        })
-    }
-
-    setShowModal = (show) => {
-        this.setState({
-            showModal: show
         })
     }
 
@@ -44,10 +45,9 @@ export default class CartDisplay extends Component {
                         <CartBox isLoading={this.state.isLoading} items={this.state.items}/>
                     </div>
                     <div className="col-sm-2">
-                        <CartCheckout setShowModal={this.setShowModal}/>
+                        <CartCheckout setShowModal={this.setShowModal} items={this.state.items} total={this.state.total} id={this.props.id}/>
                     </div>
                 </div>
-                <DeliveryInfo key={this.state.showModal} show={this.state.showModal} setShowModal={this.setShowModal}/>
             </div>
         )
     }

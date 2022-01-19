@@ -9,7 +9,7 @@
             $id = $_GET['userID'];
             $sql = "SELECT * FROM users".($id?" where UserID=$id":''); 
             break;
-        case 'POST':
+        case 'POST': // dont forget to add email check
             $typeID = $_POST["typeID"];
             $email = $_POST["email"];
             $password = $_POST["password"];

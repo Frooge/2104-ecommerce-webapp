@@ -1,6 +1,7 @@
 .cart-display {
     color: white;
     margin-bottom: calc(8em - 97.250px);
+    min-height: 600px;
 }
 
 .your-cart {

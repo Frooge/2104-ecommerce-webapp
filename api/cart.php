@@ -24,17 +24,11 @@
                 http_response_code(404);
                 die(mysqli_error($con));
             }
-
-            $stmt = $con->prepare("SELECT * FROM carts WHERE UserID = ? AND isDiscarded = 0");
-            $stmt->bind_param('i', $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $stmt->close();
-            $obj = mysqli_fetch_object($result);
-            $cartID = $obj->CartID;
+            
+            $cartID = mysqli_insert_id($con);
         }
 
-        $sql = "SELECT items.*, products.ProductName, products.RegularPrice, products.LargePrice, products.ProductImage, extras.AddOns, extras.AddFee, product_type.TypeName, stores.StoreName, stores.City, stores.Address FROM items
+        $sql = "SELECT items.*, products.ProductName, products.RegularPrice, products.LargePrice, products.ProductImage, extras.AddOns, extras.AddFee, product_type.TypeName, stores.StoreName, stores.Address, stores.Image FROM items
                 LEFT JOIN products
                 ON items.ProductID = products.ProductID
                 LEFT JOIN extras
@@ -89,13 +83,7 @@
                     die(mysqli_error($con));
                 }
 
-                $stmt = $con->prepare("SELECT * FROM carts WHERE UserID = ? AND isDiscarded = 0");
-                $stmt->bind_param('i', $id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $stmt->close();
-                $obj = mysqli_fetch_object($result);
-                $cartID = $obj->CartID;
+                $cartID = mysqli_insert_id($con);
             }
 
             $sql = "INSERT INTO items (ProductID, ExtrasID, CartID, Size, Quantity, PartialPrice) VALUES ($productID, $extrasID, $cartID, '$size', $quantity, $price)";
