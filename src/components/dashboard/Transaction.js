@@ -1,7 +1,31 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { Spinner } from 'react-bootstrap';
 import './Transaction.css'
 
 export default class Transaction extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true,
+            orders: [],
+        };
+    }
+
+    componentDidMount() {
+        axios.get(`${require('../../config/api')}order.php`)
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                isLoading: false,
+                orders: res.data
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     render() {
         return (
             <div className="transaction">

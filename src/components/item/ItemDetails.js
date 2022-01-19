@@ -12,10 +12,10 @@ export default class ItemDetails extends Component {
                 <label>Price</label>
                 <div className="row">   
                     <div className="col-2">
-                        <label>Regular</label>
+                        <label style={{display:(this.props.product.TypeName === 'Snack')?'none':'block'}}>Regular</label>
                         <h3>{'₱' + this.props.product.RegularPrice}</h3>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2" style={{display:(this.props.product.TypeName === 'Snack')?'none':'block'}}>
                         <label>Large</label>
                         <h3>{'₱' + this.props.product.LargePrice}</h3> 
                     </div>

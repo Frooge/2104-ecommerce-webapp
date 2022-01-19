@@ -99,7 +99,7 @@ export default class ItemOrder extends Component {
                                 </label>
                             </div>
                             <div className="col form-check">
-                                <input className="form-check-input" type="radio" id="large-option" name="size" value="Large" />
+                                <input className="form-check-input" type="radio" id="large-option" name="size" value="Large" disabled={this.props.product.TypeName === 'Snack'}/>
                                 <label className="form-check-label" htmlFor="large-option">
                                     Large
                                 </label>

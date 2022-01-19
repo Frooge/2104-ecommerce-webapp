@@ -86,10 +86,10 @@ export default class ProductsTab extends Component {
                             <label><strong>Type</strong></label>
                         </div>
                         <div className="col">
-                            <label><strong>Store</strong></label>
+                            <label><strong>Name</strong></label>
                         </div>
                         <div className="col">
-                            <label><strong>Name</strong></label>
+                            <label><strong>Store</strong></label>
                         </div>
                         <div className="col-1">
                             <label><strong>Regular</strong></label>
@@ -117,10 +117,10 @@ export default class ProductsTab extends Component {
                                         <label>{p.TypeName}</label>
                                     </div>
                                     <div className="col align-self-center">
-                                        <label>{p.StoreName}</label>
+                                        <label>{p.ProductName}</label>
                                     </div>
                                     <div className="col align-self-center">
-                                        <label>{p.ProductName}</label>
+                                        <label>{p.StoreName}</label>
                                     </div>
                                     <div className="col-1 align-self-center">
                                         <label>{'₱' + p.RegularPrice}</label>

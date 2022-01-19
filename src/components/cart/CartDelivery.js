@@ -26,13 +26,10 @@ export default function CartDelivery({items, id, total}) {
     const handleSubmitForm = (e) => {
         e.preventDefault();
 
-        const thisDate = new Date();
-        const date = `${thisDate.getMonth() + 1}/${thisDate.getDate()}/${thisDate.getFullYear()}`
 
         let data = new FormData(document.getElementById("order-form"));
         data.append('user', id);
         data.append('cart', items[0].CartID);
-        data.append('date', date);
         data.append('price', total);
 
         for (var pair of data.entries()) {
@@ -90,7 +87,7 @@ export default function CartDelivery({items, id, total}) {
                         ].join('')}
                         onClick={() => setActive(2)}
                     >
-                        <input type="radio" name="payment" className="form-check-input" checked={active === 2} value="Pick-up" onChange={() => {}}/>
+                        <input type="radio" name="payment" className="form-check-input" checked={active === 2} value="WalkIn" onChange={() => {}}/>
                         <h6 className="title">Pick-up</h6>
                         <p className="text-muted">Come to our store</p>
                     </label>

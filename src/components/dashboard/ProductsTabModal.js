@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2';
 import axios from 'axios'
 
 export default function ProductsTabModal({content, product, updateDisplay}) {
@@ -42,14 +43,21 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
         if(content === 'ADD'){
             axios.post(`${require('../../config/api')}product.php`, new FormData(document.getElementById(`${content}-form`)))
             .then((res) => {
-                console.log(res);
-                alert("Successfully Added");
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Added Product',
+                });
+            })
+            .then(() => {
                 setShow(false);
                 updateDisplay();
             })
             .catch((err) => {
                 console.log(err);
-                alert("An error occured");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occurred',
+                });
             })
         }
         else if(content === 'EDIT' && isProduct){
@@ -59,13 +67,21 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
             axios.post(`${require('../../config/api')}product.php`, data)
             .then((res) => {
                 console.log(res);
-                alert("Successfully Updated");
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated Product',
+                });
+            })
+            .then(() => {
                 setShow(false);
                 updateDisplay();
             })
             .catch((err) => {
                 console.log(err);
-                alert("An error occured");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occurred',
+                });
             })
         }
         else {

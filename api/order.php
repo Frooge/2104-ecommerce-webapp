@@ -5,11 +5,11 @@
 
     if($method == 'GET') {
 
+        
 
     } else if ($method == 'POST') {
         $id = $_POST['user'];
         $cartID = $_POST['cart'];
-        $date = $_POST['date'];
         $payment = $_POST['payment'];
         $price = $_POST['price'];
         $address = $_POST['address'];
@@ -24,7 +24,7 @@
             die(mysqli_error($con));
         }
 
-        $sql = "INSERT INTO orders (UserID, CartID, OrderDate, PaymentMethod) VALUES ($id, $cartID, $date, '$payment')";
+        $sql = "INSERT INTO orders (UserID, CartID, PaymentMethod) VALUES ($id, $cartID, '$payment')";
 
         $result = mysqli_query($con,$sql);
 
