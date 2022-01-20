@@ -66,7 +66,7 @@
         if($payment == 'Delivery') {
             $orderID = mysqli_insert_id($con);
 
-            $sql = "INSERT INTO delivery (OrderID, ShippingAddress, DeliveryFee, DeliveryStatus, TotalPrice) VALUES ($orderID, $id, '$address', 'PENDING', $price)";
+            $sql = "INSERT INTO delivery (OrderID, ShippingAddress, DeliveryFee, DeliveryStatus, TotalPrice, Message) VALUES ($orderID, '$address', 0, 'PENDING', $price, '')";
 
             $result = mysqli_query($con,$sql);
 

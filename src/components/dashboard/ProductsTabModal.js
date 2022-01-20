@@ -11,7 +11,6 @@ export default function ProductsTabModal({content, product, updateDisplay}) {
 
     const image = (isProduct)?
     require(`../../img/${product.ProductImage}`).default : require(`../../img/placeholder.png`).default;
-    const size = (isProduct)? product.Size : 'Regular';
     const availableSelect = (isProduct)?
     (
         <div className="form-group">

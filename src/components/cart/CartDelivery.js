@@ -32,9 +32,9 @@ export default function CartDelivery({items, id, total}) {
         data.append('cart', items[0].CartID);
         data.append('price', total);
 
-        for (var pair of data.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
+        // for (var pair of data.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]); 
+        // }
 
         axios.post(`${require('../../config/api')}order.php`, data)
         .then((res) => {

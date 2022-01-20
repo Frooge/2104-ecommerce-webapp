@@ -4,10 +4,6 @@ import CartDelivery from './CartDelivery'
 import './CartCheckout.css'
 
 export default class CartCheckout extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render() {
 
         return (
