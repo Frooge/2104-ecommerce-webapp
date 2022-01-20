@@ -16,6 +16,12 @@
                 WHERE users.FullName LIKE '$term'
                 ORDER BY delivery.DeliveryStatus ASC";
 
+        } else if(isset($_GET['order'])) {
+            $id = $_GET['order'];
+
+            $sql = "SELECT * FROM delivery
+                    WHERE OrderID = $id";
+                
         } else {
             $sql = "SELECT delivery.*, orders.UserID, users.FullName FROM delivery
                 LEFT JOIN orders

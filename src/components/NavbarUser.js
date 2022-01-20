@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap'
+import UserTransactionModal from './Transaction/UserTransactionModal'
 
 export default function NavbarUser(props) {
 
@@ -16,7 +17,7 @@ export default function NavbarUser(props) {
                             <Popover.Body className="navbar-user-popover-body">
                                 <label className="btn">Account Settings</label>
                                 <hr/>
-                                <label className="btn">Show Transactions</label>
+                                <UserTransactionModal id={props.user.UserID}/>
                                 <hr/>
                             </Popover.Body>
                         </Popover>
