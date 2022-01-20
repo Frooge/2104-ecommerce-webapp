@@ -9,7 +9,8 @@ export default class TransactionRow extends Component {
         this.state = {
             delivery: {
                 'ShippingAddress' : 'None',
-                'Message' : 'Come pick up the products at our store'
+                'Message' : 'Come pick up the products at our store',
+                'DeliveryStatus' : 'PICKUP'
             }
         }
     }
@@ -53,7 +54,7 @@ export default class TransactionRow extends Component {
                         <label><strong>Method:</strong></label>
                     </div>
                     <div className="col">
-                        <label>{this.props.order.PaymentMethod}</label>
+                        <label>{this.props.order.PaymentMethod} - <span className={this.state.delivery.DeliveryStatus}>{this.state.delivery.DeliveryStatus}</span></label>
                     </div>
                 </div>
                 <div className="row">
