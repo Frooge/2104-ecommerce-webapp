@@ -4,7 +4,7 @@ import UserTransactionModal from './Transaction/UserTransactionModal'
 
 export default function NavbarUser(props) {
 
-    if(props.name !== null){
+    if(props.user){
         return (
             <div className="row">
                 <div className="col-8">

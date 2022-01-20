@@ -16,7 +16,7 @@ class NavbarMain extends Component {
         this.navSelected = props.navSelected;
         this.navigate = props.navigate;
         this.state = {
-            user: {},
+            user: false,
             stores: []
         }
     }
@@ -138,7 +138,7 @@ class NavbarMain extends Component {
                                     <Popover.Header as="h3">Store Location</Popover.Header>
                                         <Popover.Body>
                                             {this.state.stores.map((s) => (
-                                                <div>
+                                                <div key={s.StoreID}>
                                                     <strong>{s.StoreName}</strong><p> - {s.Address}</p>
                                                 </div>
                                             ))}

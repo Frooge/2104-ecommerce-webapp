@@ -6,11 +6,42 @@ import Delivery from '../components/dashboard/Delivery'
 import ProductsGraph from '../components/dashboard/ProductsGraph'
 import ProductsTab from '../components/dashboard/ProductsTab'
 import Sidenav from '../components/dashboard/Sidenav'
+import axios from 'axios'
 import './Dashboard.css'
 
 export default class Dashboard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            isLoading: true
+        }
+    }
+
+    componentDidMount() {
+        axios.get(`${require('../config/api')}session.php`)
+        .then((res) => {
+            if(res.data.session.length !== 0) {
+                return axios.get(`${require('../config/api')}account.php?userID=${res.data.session.id}`);
+            } else {
+                window.location.replace('/');
+            }
+        })
+        .then((res) => {
+            if(res.data.UserTypeID !== '3') {
+                window.location.replace('/');
+            } else {
+                this.setState({
+                    isLoading: false
+                })
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     render() {
-        return (
+        return (this.state.isLoading) ? null : (
             <div>
                <NavbarMain 
                 navSelected='dashboard'
