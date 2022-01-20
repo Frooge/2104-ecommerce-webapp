@@ -4,12 +4,28 @@
     $method = $_SERVER['REQUEST_METHOD'];
     
     if($method == 'GET') {
-        $sql = "SELECT delivery.*, orders.UserID, users.FullName FROM delivery
+        if(isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $term = '%'.str_replace(' ','%',$search).'%';
+
+            $sql = "SELECT delivery.*, orders.UserID, users.FullName FROM delivery
+                LEFT JOIN orders
+                ON delivery.OrderID = orders.OrderID
+                LEFT JOIN users
+                ON orders.UserID = users.UserID
+                WHERE users.FullName LIKE '$term'
+                ORDER BY delivery.DeliveryStatus ASC";
+
+        } else {
+            $sql = "SELECT delivery.*, orders.UserID, users.FullName FROM delivery
                 LEFT JOIN orders
                 ON delivery.OrderID = orders.OrderID
                 LEFT JOIN users
                 ON orders.UserID = users.UserID
                 ORDER BY delivery.DeliveryStatus ASC";
+
+        }
+        
 
         $result = mysqli_query($con,$sql);
 
@@ -35,7 +51,9 @@
             $sql = "UPDATE delivery SET DeliveryStatus = '$status' WHERE DeliveryID = $id";
 
         } else if($mode == 'MESSAGE') {
+            $message = $_POST['message'];
 
+            $sql = "UPDATE delivery SET Message = '$message' WHERE DeliveryID = $id";
         }
 
         $result = mysqli_query($con,$sql);

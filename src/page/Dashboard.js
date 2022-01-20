@@ -21,10 +21,10 @@ export default class Dashboard extends Component {
                     </div>
                     <div className="col-9">
                         <InfoCard />
-                        <Transaction id="transaction" />
-                        <Delivery id="delivery" />
-                        <ProductsTab id="products" />
-                        <ProductsGraph id="graph" />
+                        <Transaction />
+                        <Delivery />
+                        <ProductsTab />
+                        {/* <ProductsGraph /> */}
                     </div>
                 </div>
             </div>

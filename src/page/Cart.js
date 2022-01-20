@@ -22,6 +22,10 @@ export default class Cart extends Component {
                     isLoggedIn: true,
                     id: res.data.session.id
                 })
+            } else {
+                this.setState({
+                    id: 0
+                })
             }
         })
         .catch((err) => {
@@ -35,10 +39,12 @@ export default class Cart extends Component {
                 <NavbarMain navSelected="cart"/>
                 {(this.state.isLoggedIn)? (
                     <CartDisplay id={this.state.id}/>
-                ) : (
+                ) : (this.state.id === 0) ? (
                     <div className="cart-center-div">
                         <h1>You need to be signed in to access your cart</h1>
                     </div>
+                ) : (
+                    <div className="cart-center-div" />
                 )}
                 
                 <Footer />

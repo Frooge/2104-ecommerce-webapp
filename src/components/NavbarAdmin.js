@@ -4,7 +4,7 @@ import './Navbar.css'
 
 export default function NavbarAdmin(props) {
 
-    if(props.userType === 'admin'){
+    if(props.userType === '3'){
         return (
             <Link to="/dashboard"
                 className={[

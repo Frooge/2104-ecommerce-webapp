@@ -10,12 +10,9 @@ export default function TransactionModal({order}) {
         data: []
     });
 
-    console.log(order, "hello");
-
     useEffect(() => {
         axios.get(`${require('../../config/api')}cart.php?cart=${order.CartID}`)
         .then((res) => {
-            console.log(res, "hello");
             setItems({
                 isLoading: false,
                 data: res.data

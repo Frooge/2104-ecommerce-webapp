@@ -15,18 +15,14 @@ class NavbarMain extends Component {
         super(props);
         this.navSelected = props.navSelected;
         this.navigate = props.navigate;
-        this.type = {
-           1: 'customer',
-           2: 'owner',
-           3: 'admin' 
-        }
         this.state = {
-            name: null,
-            userType: null
+            user: {},
+            stores: []
         }
     }
 
     componentDidMount() {
+        this.getStores();
         this.getSession()
         .then(() => {
             this.getUser();
@@ -46,8 +42,19 @@ class NavbarMain extends Component {
         axios.get(`${require('../config/api')}account.php?userID=${this.state.id}`)
         .then((res) => {
             this.setState({
-                name: res.data.Fullname,
-                userType: this.type[res.data.UserTypeID]
+                user: res.data,
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+    getStores() {
+        axios.get(`${require('../config/api')}stores.php`)
+        .then((res) => {
+            this.setState({
+                stores: res.data
             })
         })
         .catch((err) => {
@@ -129,17 +136,21 @@ class NavbarMain extends Component {
                                 overlay={
                                     <Popover id={`popover-positioned-bottom`}>
                                     <Popover.Header as="h3">Store Location</Popover.Header>
-                                    <Popover.Body>
-                                        <strong>Holy guacamole! Holy guacamole! Holy guacamole!</strong> Check this info.
-                                    </Popover.Body>
+                                        <Popover.Body>
+                                            {this.state.stores.map((s) => (
+                                                <div>
+                                                    <strong>{s.StoreName}</strong><p> - {s.Address}</p>
+                                                </div>
+                                            ))}
+                                        </Popover.Body>
                                     </Popover>
                                 }
                                 >
                                     <Button variant="warning">Store Location <i className="fas fa-store"></i></Button>
                                 </OverlayTrigger>
                             </Nav>
-                            <NavbarAdmin key='admin' userType={this.state.userType} navSelected={this.navSelected} />
-                            <NavbarUser key='user' name={this.state.name} logout={this.logoutAccount}/>
+                            <NavbarAdmin key='admin' userType={this.state.user.UserTypeID} navSelected={this.navSelected} />
+                            <NavbarUser key='user' user={this.state.user} logout={this.logoutAccount}/>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

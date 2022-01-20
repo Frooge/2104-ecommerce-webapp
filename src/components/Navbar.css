@@ -21,6 +21,20 @@
 .navbar-user {
     text-align: right;
     padding-right: 0 !important;
+    cursor: pointer;
+}
+
+.navbar-user-popover-body {
+    padding: 0 !important;
+}
+
+.navbar-user-popover-body > hr{
+    margin: 0 !important;
+}
+
+.navbar-label-area {
+    padding: 0.5em;
+    cursor: pointer;
 }
 
 a.active {

@@ -22,7 +22,6 @@ export default class ProductsTab extends Component {
     getProducts = () => {
         axios.get(`${require('../../config/api')}product.php?search=${this.state.search}`)
         .then((res) => {
-            console.log(res);
             this.setState({
                 isLoadingProducts: false,
                 products: res.data
@@ -57,7 +56,7 @@ export default class ProductsTab extends Component {
 
     render() {
         return (
-            <div className="products-tab">
+            <div className="products-tab"  id="products">
                <div className="row">
                     <span className="col-6">
                         <h3>Products</h3>

@@ -22,7 +22,6 @@ export default class Transaction extends Component {
     getTransactions = () => {
         axios.get(`${require('../../config/api')}order.php?search=${this.state.search}`)
         .then((res) => {
-            console.log(res);
             this.setState({
                 isLoading: false,
                 orders: res.data
@@ -50,7 +49,7 @@ export default class Transaction extends Component {
 
     render() {
         return (
-            <div className="transaction">
+            <div className="transaction" id="transaction">
                 <div className="row">
                     <span className="col-8">
                         <h3>Transactions</h3>
@@ -59,9 +58,9 @@ export default class Transaction extends Component {
                         <FormControl
                             type="search"
                             name="search"
-                            placeholder="Search by user/id"
+                            placeholder="Search by user"
                             className="me-2"
-                            aria-label="Search by user/id"
+                            aria-label="Search by user"
                         />
                         <Button type="submit" variant="success">Search</Button>
                     </Form>

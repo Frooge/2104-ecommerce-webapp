@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../../img/mf_logo.png'
+import { HashLink as Link} from 'react-router-hash-link'
 import './Sidenav.css'
 
 export default class Sidenav extends Component {
@@ -11,13 +12,13 @@ export default class Sidenav extends Component {
                 <h2>Mcford Milktea</h2>
                 </div>
                 <hr />
-                <a href="#transaction">Transaction</a>
+                <Link to="/dashboard#transaction">Transaction</Link>
                 <hr />
-                <a href="#delivery">Delivery</a>
+                <Link to="/dashboard#delivery">Delivery</Link>
                 <hr />
-                <a href="#products">Products</a>
-                <hr />
-                <a href="#graph">Graph</a>
+                <Link to="/dashboard#products">Products</Link>
+                {/* <hr />
+                <Link to="/dashboard#graph">Graph</Link> */}
             </div>
         )
     }

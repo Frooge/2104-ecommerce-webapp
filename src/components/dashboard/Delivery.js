@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import $ from 'jquery'
-import { Spinner } from 'react-bootstrap'
+import { Spinner, Form, FormControl, Button } from 'react-bootstrap'
+import DeliveryModal from './DeliveryModal'
+import Swal from 'sweetalert2'
 import './Delivery.css'
 
 export default class Delivery extends Component {
@@ -19,9 +21,8 @@ export default class Delivery extends Component {
     }
 
     getDelivery = () => {
-        axios.get(`${require('../../config/api')}delivery.php`)
+        axios.get(`${require('../../config/api')}delivery.php?search=${this.state.search}&mode=SEARCH`)
         .then((res) => {
-            console.log(res);
             this.setState({
                 isLoading: false,
                 delivery: res.data
@@ -47,9 +48,16 @@ export default class Delivery extends Component {
         axios.post(`${require('../../config/api')}delivery.php`, data)
         .then((res) => {
             console.log(res);
-            this.setState({
+            return this.setState({
                 isLoading: true,
-            }, this.getDelivery);
+            });
+        })
+        .then(() => {
+            this.getDelivery()
+            Swal.fire({
+                icon: 'success',
+                title: `Delivery#${id} Changed To ${status}`
+            })
         })
         .catch((err) => {
             console.log(err);
@@ -73,14 +81,21 @@ export default class Delivery extends Component {
 
     render() {
         return (
-            <div className="delivery">
+            <div className="delivery" id="delivery">
                 <div className="row">
-                    <span className="col-10">
+                    <span className="col-8">
                         <h3>Delivery Requests</h3>
                     </span>
-                    <div className="col-2 dash-btn">
-                        <button className="btn btn-primary w-100">VIEW ALL</button>
-                    </div>
+                    <Form className="d-flex col-4" id="delivery-search-form" onSubmit={this.handleSearch}>
+                        <FormControl
+                            type="search"
+                            name="search"
+                            placeholder="Search by user"
+                            className="me-2"
+                            aria-label="Search by user"
+                        />
+                        <Button type="submit" variant="success">Search</Button>
+                    </Form>
                 </div>
                 <hr />
                 <div className="row">
@@ -123,7 +138,7 @@ export default class Delivery extends Component {
                         </div>
                         <div className="col-4 align-self-center">
                             <form id="status-button-form">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <div className="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label htmlFor={'options-' + d.DeliveryID + '-1'}
                                     className={[
                                         "btn btn-warning delivery-status-btn delivery-status",
@@ -152,7 +167,7 @@ export default class Delivery extends Component {
                             </form> 
                         </div>
                         <div className="col-1 align-self-center">
-                            <span><i className="fas fa-edit" /></span>
+                            <DeliveryModal message={d.Message} id={d.DeliveryID} update={this.getDelivery}/>
                         </div>
                     </div>
                 )) : (
