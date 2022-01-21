@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2022 at 05:21 PM
+-- Generation Time: Jan 21, 2022 at 01:21 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -39,7 +39,12 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`CartID`, `UserID`, `TotalPrice`, `isDiscarded`) VALUES
-(2, 1, 0, 0);
+(13, 1, 238, 1),
+(14, 1, 89, 1),
+(15, 3, 78, 1),
+(16, 3, 327, 1),
+(17, 3, 0, 0),
+(18, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -50,12 +55,20 @@ INSERT INTO `carts` (`CartID`, `UserID`, `TotalPrice`, `isDiscarded`) VALUES
 CREATE TABLE `delivery` (
   `DeliveryID` int(16) NOT NULL,
   `OrderID` int(16) NOT NULL,
-  `UserID` int(16) NOT NULL,
   `ShippingAddress` varchar(50) NOT NULL,
   `DeliveryFee` int(16) NOT NULL,
-  `DeliveryStatus` enum('Ongoing','Successful','Unsuccessful') NOT NULL,
-  `TotalPrice` int(16) NOT NULL
+  `DeliveryStatus` enum('PENDING','ONGOING','SUCCESSFUL','DENIED') NOT NULL,
+  `TotalPrice` int(16) NOT NULL,
+  `Message` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`DeliveryID`, `OrderID`, `ShippingAddress`, `DeliveryFee`, `DeliveryStatus`, `TotalPrice`, `Message`) VALUES
+(4, 15, 'Cebu City', 0, 'ONGOING', 78, 'Hello world'),
+(5, 16, 'Cebu City', 0, 'SUCCESSFUL', 327, '10-15 mins delivery tops');
 
 -- --------------------------------------------------------
 
@@ -104,10 +117,11 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`ItemID`, `ProductID`, `ExtrasID`, `CartID`, `Size`, `Quantity`, `PartialPrice`) VALUES
-(1, 1, 1, 2, 'Regular', 1, 89),
-(2, 1, 2, 2, 'Large', 4, 476),
-(3, 2, 5, 2, 'Regular', 2, 218),
-(4, 2, 6, 2, 'Large', 3, 387);
+(21, 1, 2, 13, 'Large', 2, 238),
+(22, 12, 7, 15, 'Regular', 2, 78),
+(23, 9, 4, 16, 'Regular', 1, 89),
+(24, 1, 2, 16, 'Large', 2, 238),
+(25, 4, 1, 14, 'Regular', 1, 89);
 
 -- --------------------------------------------------------
 
@@ -119,9 +133,19 @@ CREATE TABLE `orders` (
   `OrderID` int(16) NOT NULL,
   `UserID` int(16) NOT NULL,
   `CartID` int(16) NOT NULL,
-  `OrderDate` date NOT NULL,
+  `OrderDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `PaymentMethod` enum('Delivery','WalkIn') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `CartID`, `OrderDate`, `PaymentMethod`) VALUES
+(14, 1, 13, '2022-01-19 13:31:23', 'WalkIn'),
+(15, 3, 15, '2022-01-19 13:38:10', 'Delivery'),
+(16, 3, 16, '2022-01-19 13:38:57', 'Delivery'),
+(17, 1, 14, '2022-01-20 05:46:08', 'WalkIn');
 
 -- --------------------------------------------------------
 
@@ -158,7 +182,7 @@ INSERT INTO `products` (`ProductID`, `ProductTypeID`, `StoreID`, `ProductName`, 
 (10, 3, 1, 'Burger (Plain)', 35, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
 (11, 3, 1, 'Burger with cheese', 55, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
 (12, 3, 1, 'Regular Hotdog', 39, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1),
-(13, 3, 1, 'French Fries', 45, 15, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1);
+(13, 3, 1, 'French Fries', 45, 0, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"', 'sn.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +213,6 @@ INSERT INTO `product_type` (`ProductTypeID`, `TypeName`) VALUES
 CREATE TABLE `stores` (
   `StoreID` int(16) NOT NULL,
   `StoreName` varchar(50) NOT NULL,
-  `City` varchar(50) NOT NULL,
   `Address` varchar(50) NOT NULL,
   `BPermit` varchar(50) NOT NULL,
   `Image` varchar(50) NOT NULL
@@ -199,8 +222,8 @@ CREATE TABLE `stores` (
 -- Dumping data for table `stores`
 --
 
-INSERT INTO `stores` (`StoreID`, `StoreName`, `City`, `Address`, `BPermit`, `Image`) VALUES
-(1, 'Mcford Milk Tea', 'Cebu City', '1469 Villalon Drive Capitol Site', 'NA', 'NA');
+INSERT INTO `stores` (`StoreID`, `StoreName`, `Address`, `BPermit`, `Image`) VALUES
+(1, 'Mcford Milk Tea', '1469 Villalon Drive Capitol Site, Cebu City', 'NA', 'mf_logo.png');
 
 -- --------------------------------------------------------
 
@@ -265,8 +288,7 @@ ALTER TABLE `carts`
 --
 ALTER TABLE `delivery`
   ADD PRIMARY KEY (`DeliveryID`),
-  ADD KEY `OrderID` (`OrderID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `OrderID` (`OrderID`);
 
 --
 -- Indexes for table `extras`
@@ -334,13 +356,13 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `CartID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `CartID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `DeliveryID` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `DeliveryID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `extras`
@@ -352,13 +374,13 @@ ALTER TABLE `extras`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `ItemID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ItemID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `OrderID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -404,8 +426,7 @@ ALTER TABLE `carts`
 -- Constraints for table `delivery`
 --
 ALTER TABLE `delivery`
-  ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
-  ADD CONSTRAINT `delivery_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`);
 
 --
 -- Constraints for table `extras`
