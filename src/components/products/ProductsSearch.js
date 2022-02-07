@@ -44,13 +44,6 @@ class ProductsSearch extends Component {
                         <div className="col-sm-6">
                             <label>{this.props.results} results</label>
                         </div>
-                        <div className="col-sm-1">
-                            <DropdownButton id="dropdown-basic-button" title="Sort By">
-                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                            </DropdownButton>
-                        </div>
                     </div>
                 </div>
                 

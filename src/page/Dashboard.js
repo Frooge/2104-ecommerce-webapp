@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
                         <Sidenav />
                     </div>
                     <div className="col-9">
-                        <InfoCard />
+                        {/* <InfoCard /> */}
                         <Transaction />
                         <Delivery />
                         <ProductsTab />
