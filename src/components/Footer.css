@@ -10,8 +10,8 @@
     flex-direction: column;
 }
 
-.container-info h2 {
-    color: white;
+.container-info h4 {
+    color: rgb(179, 178, 178);
 }
 
 .container-info a {
