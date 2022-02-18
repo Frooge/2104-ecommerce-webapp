@@ -22,6 +22,7 @@ export default class Transaction extends Component {
     getTransactions = () => {
         axios.get(`${require('../../config/api')}order.php?search=${this.state.search}`)
         .then((res) => {
+            console.log(res.data);
             this.setState({
                 isLoading: false,
                 orders: res.data

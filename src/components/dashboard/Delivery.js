@@ -67,7 +67,7 @@ export default class Delivery extends Component {
     handleSearch = (e) => {
         e.preventDefault();
 
-        let value = $('#transaction-search-form').serializeArray(),
+        let value = $('#delivery-search-form').serializeArray(),
         obj = {};
         $(value).each(function(i , field){
             obj[field.name] = field.value;
@@ -76,7 +76,7 @@ export default class Delivery extends Component {
         this.setState({
             isLoading: true,
             search: obj["search"]
-        }, this.getTransactions);
+        }, this.getDelivery);
     }
 
     render() {

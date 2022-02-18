@@ -9,7 +9,7 @@
             $search = $_GET['search'];
             $term = '%'.str_replace(' ','%',$search).'%';
 
-            $sql = "SELECT orders.*, users.Fullname, carts.TotalPrice FROM orders
+            $sql = "SELECT orders.*, users.FullName, carts.TotalPrice FROM orders
                 LEFT JOIN users
                 ON orders.UserID = users.UserID
                 LEFT JOIN carts
@@ -19,7 +19,7 @@
         } else if(isset($_GET['user'])) {
             $id = $_GET['user'];
 
-            $sql = "SELECT orders.*, users.Fullname, carts.TotalPrice FROM orders
+            $sql = "SELECT orders.*, users.FullName, carts.TotalPrice FROM orders
                     LEFT JOIN users
                     ON orders.UserID = users.UserID
                     LEFT JOIN carts
