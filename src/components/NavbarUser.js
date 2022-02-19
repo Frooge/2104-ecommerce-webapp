@@ -23,7 +23,7 @@ export default function NavbarUser(props) {
                         </Popover>
                     }
                     >
-                        <span className="nav-link navbar-user"><i className="fas fa-user"></i> {props.user.Fullname}</span>
+                        <span className="nav-link navbar-user"><i className="fas fa-user"></i> {props.user.FullName}</span>
                     </OverlayTrigger>
                 </div>
                 <div className="col-4">
